@@ -1,45 +1,66 @@
 import { motion } from "framer-motion";
-import { Briefcase, Brain, Code, Languages, Compass, Megaphone, Palette, Dumbbell } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Briefcase, Brain, Code, Languages, Compass, Megaphone, Palette, Dumbbell, ArrowRight } from "lucide-react";
 
 const categories = [
-  { icon: Briefcase, label: "Business Coaching", color: "text-accent" },
-  { icon: Brain, label: "Meditation", color: "text-primary" },
-  { icon: Code, label: "Programming", color: "text-primary" },
-  { icon: Languages, label: "Languages", color: "text-accent" },
-  { icon: Compass, label: "Career Mentorship", color: "text-primary" },
-  { icon: Megaphone, label: "Marketing", color: "text-accent" },
-  { icon: Palette, label: "Design", color: "text-primary" },
-  { icon: Dumbbell, label: "Fitness", color: "text-accent" },
+  { icon: Briefcase, label: "Business Coaching", count: "120+ tutors", gradient: "from-amber-500/10 to-orange-500/10" },
+  { icon: Brain, label: "Meditation & Wellness", count: "85+ tutors", gradient: "from-primary/10 to-teal-500/10" },
+  { icon: Code, label: "Programming", count: "340+ tutors", gradient: "from-blue-500/10 to-indigo-500/10" },
+  { icon: Languages, label: "Languages", count: "200+ tutors", gradient: "from-green-500/10 to-emerald-500/10" },
+  { icon: Compass, label: "Career Mentorship", count: "95+ tutors", gradient: "from-purple-500/10 to-pink-500/10" },
+  { icon: Megaphone, label: "Marketing", count: "110+ tutors", gradient: "from-rose-500/10 to-red-500/10" },
+  { icon: Palette, label: "Design", count: "150+ tutors", gradient: "from-violet-500/10 to-purple-500/10" },
+  { icon: Dumbbell, label: "Fitness", count: "75+ tutors", gradient: "from-cyan-500/10 to-sky-500/10" },
 ];
 
 const MarketplaceSection = () => (
-  <section id="marketplace" className="py-24">
-    <div className="container mx-auto px-4">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-sm font-semibold text-accent">Tutor Marketplace</span>
-        <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">
-          Find expert tutors in <span className="text-gradient">any category</span>
-        </h2>
-        <p className="mt-4 text-muted-foreground">
-          Browse professional tutors and coaches across dozens of skill categories.
-        </p>
-      </div>
+  <section id="marketplace" className="py-28 lg:py-36 relative">
+    <div className="container mx-auto px-6">
+      <div className="grid lg:grid-cols-[1fr,1.2fr] gap-16 items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-xs font-semibold text-accent mb-6">
+            Tutor Marketplace
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.02em] leading-tight">
+            Find expert tutors in{" "}
+            <span className="text-gradient">any category</span>
+          </h2>
+          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
+            Browse hundreds of professional tutors and coaches. Book sessions at transparent prices with verified reviews.
+          </p>
+          <Button variant="hero" size="lg" className="mt-8">
+            Browse All Tutors <ArrowRight className="w-4 h-4" />
+          </Button>
+        </motion.div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {categories.map((c, i) => (
-          <motion.button
-            key={c.label}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
-            whileHover={{ scale: 1.04 }}
-            className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-card p-6 hover:glow-primary transition-all duration-200 cursor-pointer"
-          >
-            <c.icon className={`w-8 h-8 ${c.color}`} />
-            <span className="text-sm font-semibold">{c.label}</span>
-          </motion.button>
-        ))}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-2 gap-3"
+        >
+          {categories.map((c, i) => (
+            <motion.button
+              key={c.label}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className={`flex items-start gap-3 rounded-2xl border border-border bg-card p-5 hover:shadow-raised hover:border-primary/20 transition-all duration-300 cursor-pointer text-left`}
+            >
+              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${c.gradient} flex items-center justify-center flex-shrink-0`}>
+                <c.icon className="w-5 h-5 text-primary" />
+              </div>
+              <div className="min-w-0">
+                <span className="text-sm font-semibold block truncate">{c.label}</span>
+                <span className="text-xs text-muted-foreground">{c.count}</span>
+              </div>
+            </motion.button>
+          ))}
+        </motion.div>
       </div>
     </div>
   </section>
