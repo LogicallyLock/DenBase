@@ -5,6 +5,7 @@ import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import MarketplaceSection from "@/components/landing/MarketplaceSection";
 import PricingSection from "@/components/landing/PricingSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
+import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => (
@@ -16,6 +17,7 @@ const Index = () => (
     <MarketplaceSection />
     <PricingSection />
     <TestimonialsSection />
+    <CTASection />
     <Footer />
   </div>
 );
