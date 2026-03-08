@@ -10,7 +10,7 @@ const AdminRoles = () => {
   const [roles, setRoles] = useState<any[]>([]);
   const [profiles, setProfiles] = useState<any[]>([]);
   const [selectedUserId, setSelectedUserId] = useState("");
-  const [selectedRole, setSelectedRole] = useState<"admin" | "moderator" | "user">("admin");
+  const [selectedRole, setSelectedRole] = useState<"admin" | "moderator" | "user">("user");
 
   const fetchData = async () => {
     const [rolesRes, profilesRes] = await Promise.all([
