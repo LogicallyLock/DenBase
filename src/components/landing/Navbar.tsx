@@ -54,6 +54,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <Link to="/auth"><Button variant="ghost" size="default">Log In</Button></Link>
           <Link to="/auth"><Button variant="hero" size="default">
             Get Started <ArrowRight className="w-4 h-4" />
