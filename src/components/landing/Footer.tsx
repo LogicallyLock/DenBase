@@ -49,7 +49,7 @@ const Footer = () => (
 
       <div className="py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} SkillSwap. All rights reserved.
+          © {new Date().getFullYear()} Denbase. All rights reserved.
         </p>
         <p className="text-xs text-muted-foreground">
           Built with ❤️ for learners everywhere
