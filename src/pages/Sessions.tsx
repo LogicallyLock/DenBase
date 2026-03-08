@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock, Video } from "lucide-react";
 
@@ -12,17 +14,28 @@ const Sessions = () => {
 
   useEffect(() => {
     if (!user) return;
-    const fetch = async () => {
-      const { data } = await supabase
-        .from("sessions")
-        .select("*")
-        .or(`host_id.eq.${user.id},participant_id.eq.${user.id}`)
-        .order("scheduled_at", { ascending: false });
-      setSessions(data || []);
-      setLoading(false);
-    };
-    fetch();
+    fetchSessions();
   }, [user]);
+
+  const fetchSessions = async () => {
+    if (!user) return;
+    const { data } = await supabase
+      .from("sessions")
+      .select("*")
+      .or(`host_id.eq.${user.id},participant_id.eq.${user.id}`)
+      .order("scheduled_at", { ascending: false });
+    setSessions(data || []);
+    setLoading(false);
+  };
+
+  const cancelSession = async (sessionId: string) => {
+    const { error } = await supabase.from("sessions").update({ status: "cancelled" }).eq("id", sessionId);
+    if (error) toast.error(error.message);
+    else {
+      toast.success("Session cancelled");
+      fetchSessions();
+    }
+  };
 
   const statusColor: Record<string, string> = {
     scheduled: "bg-primary/10 text-primary",
@@ -79,6 +92,13 @@ const Sessions = () => {
                       <span className="font-semibold text-primary">${s.price}</span>
                     )}
                   </div>
+                  {s.status === "scheduled" && (
+                    <div className="mt-3">
+                      <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" onClick={() => cancelSession(s.id)}>
+                        Cancel Session
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
