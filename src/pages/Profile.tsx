@@ -195,7 +195,7 @@ const Profile = () => {
                   </div>
                   {addingType === type && (
                     <div className="mt-4">
-                      <Input placeholder="Search skills..." value={skillSearch} onChange={(e) => setSkillSearch(e.target.value)} className="mb-2" />
+                     <Input placeholder="Search skills..." value={skillSearch} onChange={(e) => setSkillSearch(e.target.value)} className="mb-2" />
                       <div className="max-h-40 overflow-y-auto space-y-1">
                         {filteredSkills.slice(0, 10).map((s) => (
                           <button
@@ -206,6 +206,19 @@ const Profile = () => {
                             {s.name} <span className="text-muted-foreground">· {s.category}</span>
                           </button>
                         ))}
+                        {filteredSkills.length === 0 && skillSearch.trim() && (
+                          <button
+                            onClick={async () => {
+                              const { data, error } = await supabase.from("skills").insert({ name: skillSearch.trim(), category: "Custom" }).select().single();
+                              if (error) { toast.error(error.message); return; }
+                              setAllSkills((prev) => [...prev, data]);
+                              await addSkill(data.id, type);
+                            }}
+                            className="w-full text-left px-3 py-2 text-sm rounded-lg hover:bg-secondary transition-colors text-primary font-medium"
+                          >
+                            + Create "{skillSearch.trim()}"
+                          </button>
+                        )}
                       </div>
                     </div>
                   )}

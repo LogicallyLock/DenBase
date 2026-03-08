@@ -89,8 +89,8 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="flex gap-3 pt-3 mt-2 border-t border-border">
-                <Button variant="ghost" size="default" className="flex-1">Log In</Button>
-                <Button variant="hero" size="default" className="flex-1">Get Started</Button>
+                <Link to="/auth" className="flex-1"><Button variant="ghost" size="default" className="w-full" onClick={() => setMobileOpen(false)}>Log In</Button></Link>
+                <Link to="/auth" className="flex-1"><Button variant="hero" size="default" className="w-full" onClick={() => setMobileOpen(false)}>Get Started</Button></Link>
               </div>
             </div>
           </motion.div>
