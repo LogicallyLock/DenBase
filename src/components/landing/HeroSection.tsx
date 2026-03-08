@@ -13,7 +13,10 @@ const stats = [
   { value: "4.9★", label: "Avg Rating" },
 ];
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const [demoOpen, setDemoOpen] = useState(false);
+
+  return (
   <section className="relative min-h-screen flex items-center pt-[72px] overflow-hidden">
     {/* Background effects */}
     <div className="absolute inset-0 grid-bg pointer-events-none" />
