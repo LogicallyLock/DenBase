@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Briefcase, Brain, Code, Languages, Compass, Megaphone, Palette, Dumbbell, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const categories = [
   { icon: Briefcase, label: "Business Coaching", count: "120+ tutors", gradient: "from-amber-500/10 to-orange-500/10" },
