@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Search, Sparkles, Play } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import heroImg from "@/assets/hero-illustration.png";
+import DemoModal from "./DemoModal";
 
 const stats = [
   { value: "10K+", label: "Active Learners" },
