@@ -1,5 +1,6 @@
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Users, Target, Heart, Zap } from "lucide-react";
 
@@ -12,6 +13,7 @@ const values = [
 
 const About = () => (
   <div className="min-h-screen bg-background">
+    <SEO title="About" description="Learn about Denbase — the peer-to-peer learning platform connecting learners and tutors worldwide." canonical="/about" />
     <Navbar />
     <main className="pt-24 pb-16">
       <div className="container mx-auto px-6 max-w-4xl">

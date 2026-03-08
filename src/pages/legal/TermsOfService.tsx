@@ -1,8 +1,10 @@
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 
 const TermsOfService = () => (
   <div className="min-h-screen bg-background">
+    <SEO title="Terms of Service" description="Read the terms and conditions for using the Denbase platform." canonical="/terms" />
     <Navbar />
     <main className="pt-24 pb-16">
       <div className="container mx-auto px-6 max-w-3xl prose dark:prose-invert">

@@ -1,8 +1,10 @@
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 
 const GDPR = () => (
   <div className="min-h-screen bg-background">
+    <SEO title="GDPR Compliance" description="Your data rights under GDPR and how Denbase protects your information." canonical="/gdpr" />
     <Navbar />
     <main className="pt-24 pb-16">
       <div className="container mx-auto px-6 max-w-3xl prose dark:prose-invert">
