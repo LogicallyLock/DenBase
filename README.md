@@ -1,73 +1,103 @@
-# Welcome to your Lovable project
+# Denbase — Peer Learning Platform
 
-## Project info
+Exchange skills with peers or connect with professional tutors. AI-powered matching for the perfect learning partner.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Tech Stack
 
-## How can I edit this code?
+- **Frontend:** React 18 + TypeScript + Vite
+- **Styling:** Tailwind CSS + shadcn/ui
+- **Backend:** Lovable Cloud (Supabase)
+- **State:** TanStack React Query
 
-There are several ways of editing your application.
+## Prerequisites
 
-**Use Lovable**
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm (comes with Node.js)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### 1. Clone the repository
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+```bash
 git clone <YOUR_GIT_URL>
+cd denbase
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 2. Install dependencies
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+npm install
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 3. Set up environment variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_SUPABASE_URL="your-supabase-url"
+VITE_SUPABASE_PUBLISHABLE_KEY="your-supabase-anon-key"
+VITE_SUPABASE_PROJECT_ID="your-project-id"
+```
+
+> **Where to find these values:**
+> - Go to your Lovable project → Settings → Cloud to find your backend credentials.
+> - The publishable key is safe to use in frontend code (it's not a secret).
+
+### 4. Start the development server
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at **http://localhost:8080**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 5. Build for production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+npm run preview
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Available Scripts
 
-## What technologies are used for this project?
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server with HMR |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run tests |
+| `npm run test:watch` | Run tests in watch mode |
 
-This project is built with:
+## Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── assets/          # Static assets (images, icons)
+├── components/      # Reusable UI components
+│   ├── admin/       # Admin panel components
+│   ├── landing/     # Landing page sections
+│   └── ui/          # shadcn/ui components
+├── contexts/        # React context providers
+├── hooks/           # Custom React hooks
+├── integrations/    # Backend client & types
+├── lib/             # Utility functions
+├── pages/           # Route page components
+│   ├── admin/       # Admin pages
+│   └── legal/       # Legal pages
+└── test/            # Test setup & utilities
+```
 
-## How can I deploy this project?
+## Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Via Lovable
+Click **Publish** in the Lovable editor to deploy instantly.
 
-## Can I connect a custom domain to my Lovable project?
+### Self-hosted
+1. Run `npm run build` to generate the `dist/` folder
+2. Deploy the `dist/` folder to any static hosting (Vercel, Netlify, Cloudflare Pages, etc.)
+3. Set the environment variables on your hosting platform
 
-Yes, you can!
+## License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Private — All rights reserved.
