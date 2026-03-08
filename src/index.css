@@ -64,9 +64,9 @@
     --destructive-foreground: 210 20% 95%;
     --border: 224 18% 16%;
     --input: 224 18% 16%;
-    --ring: 174 72% 46%;
+    --ring: 192 85% 48%;
 
-    --hero-gradient: linear-gradient(135deg, hsl(174, 72%, 46%) 0%, hsl(195, 80%, 50%) 50%, hsl(30, 95%, 55%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(210, 70%, 30%) 0%, hsl(192, 85%, 48%) 50%, hsl(175, 90%, 55%) 100%);
     --card-gradient: linear-gradient(180deg, hsl(224, 22%, 10%) 0%, hsl(224, 22%, 8%) 100%);
     --surface-elevated: 0 1px 3px 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
     --surface-raised: 0 4px 16px -2px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
