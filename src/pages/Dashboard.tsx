@@ -167,6 +167,57 @@ const Dashboard = () => {
             ))}
           </div>
 
+          {/* Recent Matches */}
+          <div className="rounded-2xl border border-border bg-card p-6 mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-bold">Recent Matches</h2>
+              <Link to="/matches" className="text-xs text-primary font-medium hover:underline">View all</Link>
+            </div>
+            {recentMatches.length === 0 ? (
+              <div className="text-center py-8">
+                <Users className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground">No matches yet</p>
+                <Link to="/marketplace">
+                  <Button variant="outline" size="sm" className="mt-3">Find matches</Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {recentMatches.map((m: any) => (
+                  <div key={m.id} className="flex items-center justify-between p-3 rounded-xl bg-secondary/50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
+                        {(m.other_profile?.full_name || "?")[0]?.toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold">{m.other_profile?.full_name || "User"}</p>
+                        <p className="text-xs text-muted-foreground capitalize">{m.status}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      {m.status === "pending" && m.user_b === user?.id && (
+                        <>
+                          <Button variant="default" size="sm" onClick={() => updateMatch(m.id, "accepted")}>
+                            <UserCheck className="w-4 h-4 mr-1" /> Accept
+                          </Button>
+                          <Button variant="outline" size="sm" onClick={() => updateMatch(m.id, "declined")}>
+                            <UserX className="w-4 h-4" />
+                          </Button>
+                        </>
+                      )}
+                      {m.status === "pending" && m.user_a === user?.id && (
+                        <span className="text-xs text-muted-foreground px-2 py-1">Sent</span>
+                      )}
+                      {m.status === "accepted" && (
+                        <Link to="/messages"><Button variant="outline" size="sm">Message</Button></Link>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           {/* Upcoming sessions */}
           <div className="rounded-2xl border border-border bg-card p-6">
             <div className="flex items-center justify-between mb-4">
@@ -191,7 +242,10 @@ const Dashboard = () => {
                         {s.scheduled_at ? new Date(s.scheduled_at).toLocaleDateString() : "TBD"}
                       </p>
                     </div>
-                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary">{s.session_type}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-primary">{s.session_type}</span>
+                      <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" onClick={() => cancelSession(s.id)}>Cancel</Button>
+                    </div>
                   </div>
                 ))}
               </div>
