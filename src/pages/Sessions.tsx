@@ -14,17 +14,28 @@ const Sessions = () => {
 
   useEffect(() => {
     if (!user) return;
-    const fetch = async () => {
-      const { data } = await supabase
-        .from("sessions")
-        .select("*")
-        .or(`host_id.eq.${user.id},participant_id.eq.${user.id}`)
-        .order("scheduled_at", { ascending: false });
-      setSessions(data || []);
-      setLoading(false);
-    };
-    fetch();
+    fetchSessions();
   }, [user]);
+
+  const fetchSessions = async () => {
+    if (!user) return;
+    const { data } = await supabase
+      .from("sessions")
+      .select("*")
+      .or(`host_id.eq.${user.id},participant_id.eq.${user.id}`)
+      .order("scheduled_at", { ascending: false });
+    setSessions(data || []);
+    setLoading(false);
+  };
+
+  const cancelSession = async (sessionId: string) => {
+    const { error } = await supabase.from("sessions").update({ status: "cancelled" }).eq("id", sessionId);
+    if (error) toast.error(error.message);
+    else {
+      toast.success("Session cancelled");
+      fetchSessions();
+    }
+  };
 
   const statusColor: Record<string, string> = {
     scheduled: "bg-primary/10 text-primary",
