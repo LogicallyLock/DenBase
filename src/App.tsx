@@ -16,12 +16,26 @@ import Messages from "./pages/Messages";
 import Matches from "./pages/Matches";
 import Sessions from "./pages/Sessions";
 import TutorProfile from "./pages/TutorProfile";
+import About from "./pages/About";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Careers from "./pages/Careers";
+import CareerDetail from "./pages/CareerDetail";
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import TermsOfService from "./pages/legal/TermsOfService";
+import CookiePolicy from "./pages/legal/CookiePolicy";
+import GDPR from "./pages/legal/GDPR";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminMatches from "./pages/admin/AdminMatches";
 import AdminSessions from "./pages/admin/AdminSessions";
 import AdminSkills from "./pages/admin/AdminSkills";
 import AdminRoles from "./pages/admin/AdminRoles";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
+import AdminCareers from "./pages/admin/AdminCareers";
+import AdminCareerEditor from "./pages/admin/AdminCareerEditor";
+import AdminApplications from "./pages/admin/AdminApplications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +51,15 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/:id" element={<CareerDetail />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
+            <Route path="/gdpr" element={<GDPR />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/marketplace" element={<ProtectedRoute><Marketplace /></ProtectedRoute>} />
@@ -50,6 +73,11 @@ const App = () => (
             <Route path="/admin/sessions" element={<AdminRoute><AdminSessions /></AdminRoute>} />
             <Route path="/admin/skills" element={<AdminRoute><AdminSkills /></AdminRoute>} />
             <Route path="/admin/roles" element={<AdminRoute><AdminRoles /></AdminRoute>} />
+            <Route path="/admin/blog" element={<AdminRoute><AdminBlog /></AdminRoute>} />
+            <Route path="/admin/blog/:id" element={<AdminRoute><AdminBlogEditor /></AdminRoute>} />
+            <Route path="/admin/careers" element={<AdminRoute><AdminCareers /></AdminRoute>} />
+            <Route path="/admin/careers/:id" element={<AdminRoute><AdminCareerEditor /></AdminRoute>} />
+            <Route path="/admin/applications" element={<AdminRoute><AdminApplications /></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
