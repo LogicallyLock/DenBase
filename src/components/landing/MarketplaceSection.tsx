@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Briefcase, Brain, Code, Languages, Compass, Megaphone, Palette, Dumbbell, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const categories = [
   { icon: Briefcase, label: "Business Coaching", count: "120+ tutors", gradient: "from-amber-500/10 to-orange-500/10" },
@@ -33,9 +34,11 @@ const MarketplaceSection = () => (
           <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
             Browse hundreds of professional tutors and coaches. Book sessions at transparent prices with verified reviews.
           </p>
-          <Button variant="hero" size="lg" className="mt-8">
-            Browse All Tutors <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link to="/marketplace">
+            <Button variant="hero" size="lg" className="mt-8">
+              Browse All Tutors <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </motion.div>
 
         <motion.div

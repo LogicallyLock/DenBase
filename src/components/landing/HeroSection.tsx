@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Search, Sparkles, Play } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import heroImg from "@/assets/hero-illustration.png";
+import DemoModal from "./DemoModal";
 
 const stats = [
   { value: "10K+", label: "Active Learners" },
@@ -11,7 +13,10 @@ const stats = [
   { value: "4.9★", label: "Avg Rating" },
 ];
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const [demoOpen, setDemoOpen] = useState(false);
+
+  return (
   <section className="relative min-h-screen flex items-center pt-[72px] overflow-hidden">
     {/* Background effects */}
     <div className="absolute inset-0 grid-bg pointer-events-none" />
@@ -55,7 +60,7 @@ const HeroSection = () => (
                 Get Started Free <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
-            <Button variant="outline" size="xl" className="gap-2">
+            <Button variant="outline" size="xl" className="gap-2" onClick={() => setDemoOpen(true)}>
               <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                 <Play className="w-3 h-3 text-primary ml-0.5" />
               </div>
@@ -149,7 +154,9 @@ const HeroSection = () => (
         ))}
       </motion.div>
     </div>
+    <DemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
   </section>
-);
+  );
+};
 
 export default HeroSection;

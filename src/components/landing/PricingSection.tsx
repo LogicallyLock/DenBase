@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -100,9 +101,11 @@ const PricingSection = () => (
               ))}
             </ul>
 
-            <Button variant={p.featured ? "hero" : "outline"} size="lg" className="w-full">
-              {p.cta} {p.featured && <ArrowRight className="w-4 h-4" />}
-            </Button>
+            <Link to="/auth" className="w-full">
+              <Button variant={p.featured ? "hero" : "outline"} size="lg" className="w-full">
+                {p.cta} {p.featured && <ArrowRight className="w-4 h-4" />}
+              </Button>
+            </Link>
           </motion.div>
         ))}
       </div>
