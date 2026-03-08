@@ -98,7 +98,9 @@ const Marketplace = () => {
                         <DollarSign className="w-3 h-3" />{t.session_price || "Free"}
                       </span>
                     </div>
-                    <Button variant="outline" size="sm">View Profile</Button>
+                    <Link to={`/tutor/${t.id}`}>
+                      <Button variant="outline" size="sm">View Profile</Button>
+                    </Link>
                   </div>
                 </motion.div>
               ))}
