@@ -7,12 +7,14 @@ import { motion } from "framer-motion";
 import {
   LayoutDashboard, MessageSquare, Calendar, User, Search,
   ArrowLeftRight, GraduationCap, Bell, LogOut, ChevronRight,
-  Users, Star, TrendingUp, Clock, UserCheck, UserX
+  Users, Star, TrendingUp, Clock, UserCheck, UserX, Shield
 } from "lucide-react";
 import { toast } from "sonner";
+import { useAdmin } from "@/hooks/useAdmin";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [upcomingSessions, setUpcomingSessions] = useState<any[]>([]);
@@ -101,6 +103,11 @@ const Dashboard = () => {
             <span className="text-gradient">Skill</span><span>Swap</span>
           </Link>
           <div className="flex items-center gap-3">
+            {isAdmin && (
+              <Link to="/admin">
+                <Button variant="ghost" size="icon" className="text-primary"><Shield className="w-4 h-4" /></Button>
+              </Link>
+            )}
             <Link to="/profile">
               <Button variant="ghost" size="icon"><User className="w-4 h-4" /></Button>
             </Link>
