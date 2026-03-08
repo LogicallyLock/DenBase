@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CTASection = () => (
   <section className="py-28 lg:py-36 relative overflow-hidden">
@@ -21,9 +22,11 @@ const CTASection = () => (
           Join thousands of learners exchanging skills and growing together. Your next breakthrough is one swap away.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-          <Button variant="hero" size="xl">
-            Get Started Free <ArrowRight className="w-5 h-5" />
-          </Button>
+          <Link to="/auth">
+            <Button variant="hero" size="xl">
+              Get Started Free <ArrowRight className="w-5 h-5" />
+            </Button>
+          </Link>
           <Button variant="outline" size="xl">
             Talk to Sales
           </Button>

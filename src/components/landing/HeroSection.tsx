@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Search, Sparkles, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImg from "@/assets/hero-illustration.png";
 
 const stats = [
@@ -49,9 +50,11 @@ const HeroSection = () => (
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button variant="hero" size="xl">
-              Get Started Free <ArrowRight className="w-5 h-5" />
-            </Button>
+            <Link to="/auth">
+              <Button variant="hero" size="xl">
+                Get Started Free <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
             <Button variant="outline" size="xl" className="gap-2">
               <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                 <Play className="w-3 h-3 text-primary ml-0.5" />
