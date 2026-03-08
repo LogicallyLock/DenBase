@@ -52,6 +52,24 @@ const Dashboard = () => {
     fetchData();
   }, [user]);
 
+  const updateMatch = async (matchId: string, status: string) => {
+    const { error } = await supabase.from("matches").update({ status }).eq("id", matchId);
+    if (error) toast.error(error.message);
+    else {
+      toast.success(status === "accepted" ? "Match accepted!" : "Match declined");
+      fetchData();
+    }
+  };
+
+  const cancelSession = async (sessionId: string) => {
+    const { error } = await supabase.from("sessions").update({ status: "cancelled" }).eq("id", sessionId);
+    if (error) toast.error(error.message);
+    else {
+      toast.success("Session cancelled");
+      fetchData();
+    }
+  };
+
   const profileCompletion = profile ? [
     profile.full_name, profile.bio, profile.avatar_url, profile.experience_level, profile.availability,
     teachSkills.length > 0, learnSkills.length > 0,
