@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => (
   <footer className="border-t border-border relative">
@@ -28,18 +28,24 @@ const Footer = () => (
         </div>
 
         {[
-          { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Marketplace", href: "#marketplace" }, { label: "Dashboard", href: "#" }, { label: "API", href: "#" }] },
-          { title: "Company", links: [{ label: "About", href: "#" }, { label: "Careers", href: "#" }, { label: "Blog", href: "#" }, { label: "Press Kit", href: "#" }] },
-          { title: "Legal", links: [{ label: "Privacy Policy", href: "#" }, { label: "Terms of Service", href: "#" }, { label: "Cookie Policy", href: "#" }, { label: "GDPR", href: "#" }] },
+          { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Marketplace", href: "#marketplace" }, { label: "Blog", to: "/blog" }] },
+          { title: "Company", links: [{ label: "About", to: "/about" }, { label: "Careers", to: "/careers" }, { label: "Blog", to: "/blog" }] },
+          { title: "Legal", links: [{ label: "Privacy Policy", to: "/privacy" }, { label: "Terms of Service", to: "/terms" }, { label: "Cookie Policy", to: "/cookies" }, { label: "GDPR", to: "/gdpr" }] },
         ].map((col) => (
           <div key={col.title}>
             <h4 className="text-sm font-semibold mb-4 tracking-tight">{col.title}</h4>
             <ul className="flex flex-col gap-3">
-              {col.links.map((l) => (
+              {col.links.map((l: any) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200">
-                    {l.label}
-                  </a>
+                  {l.to ? (
+                    <Link to={l.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200">
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <a href={l.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200">
+                      {l.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

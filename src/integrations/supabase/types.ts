@@ -14,6 +14,152 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          author_id: string
+          category: string | null
+          content: string
+          cover_image_url: string | null
+          created_at: string
+          excerpt: string | null
+          featured: boolean | null
+          id: string
+          published_at: string | null
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          category?: string | null
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          featured?: boolean | null
+          id?: string
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          category?: string | null
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          featured?: boolean | null
+          id?: string
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      career_applications: {
+        Row: {
+          applicant_email: string
+          applicant_name: string
+          career_id: string
+          cover_letter: string | null
+          created_at: string
+          id: string
+          resume_url: string | null
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          applicant_email: string
+          applicant_name: string
+          career_id: string
+          cover_letter?: string | null
+          created_at?: string
+          id?: string
+          resume_url?: string | null
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          applicant_email?: string
+          applicant_name?: string
+          career_id?: string
+          cover_letter?: string | null
+          created_at?: string
+          id?: string
+          resume_url?: string | null
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "career_applications_career_id_fkey"
+            columns: ["career_id"]
+            isOneToOne: false
+            referencedRelation: "careers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      careers: {
+        Row: {
+          benefits: string | null
+          created_at: string
+          department: string | null
+          description: string
+          id: string
+          job_type: string
+          location: string | null
+          requirements: string | null
+          salary_range: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          benefits?: string | null
+          created_at?: string
+          department?: string | null
+          description?: string
+          id?: string
+          job_type?: string
+          location?: string | null
+          requirements?: string | null
+          salary_range?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          benefits?: string | null
+          created_at?: string
+          department?: string | null
+          description?: string
+          id?: string
+          job_type?: string
+          location?: string | null
+          requirements?: string | null
+          salary_range?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       matches: {
         Row: {
           compatibility_score: number | null

@@ -2,7 +2,7 @@ import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
   LayoutDashboard, Users, ArrowLeftRight, Calendar,
-  BookOpen, Shield, CreditCard, ArrowLeft
+  BookOpen, Shield, ArrowLeft, FileText, Briefcase
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
@@ -17,6 +17,8 @@ const items = [
   { title: "Sessions", url: "/admin/sessions", icon: Calendar },
   { title: "Skills", url: "/admin/skills", icon: BookOpen },
   { title: "Roles", url: "/admin/roles", icon: Shield },
+  { title: "Blog", url: "/admin/blog", icon: FileText },
+  { title: "Careers", url: "/admin/careers", icon: Briefcase },
 ];
 
 export function AdminSidebar() {
