@@ -1,5 +1,6 @@
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import { Users, Target, Heart, Zap } from "lucide-react";
 
