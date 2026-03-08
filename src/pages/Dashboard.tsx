@@ -7,8 +7,9 @@ import { motion } from "framer-motion";
 import {
   LayoutDashboard, MessageSquare, Calendar, User, Search,
   ArrowLeftRight, GraduationCap, Bell, LogOut, ChevronRight,
-  Users, Star, TrendingUp, Clock
+  Users, Star, TrendingUp, Clock, UserCheck, UserX
 } from "lucide-react";
+import { toast } from "sonner";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
