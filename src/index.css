@@ -27,7 +27,7 @@
     --ring: 192 85% 40%;
     --radius: 0.75rem;
 
-    --hero-gradient: linear-gradient(135deg, hsl(174, 72%, 38%) 0%, hsl(195, 80%, 45%) 50%, hsl(30, 95%, 55%) 100%);
+    --hero-gradient: linear-gradient(135deg, hsl(210, 70%, 25%) 0%, hsl(192, 85%, 40%) 50%, hsl(175, 90%, 50%) 100%);
     --card-gradient: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(220, 14%, 98%) 100%);
     --surface-elevated: 0 1px 3px 0 hsl(0 0% 0% / 0.04), 0 1px 2px -1px hsl(0 0% 0% / 0.04);
     --surface-raised: 0 4px 16px -2px hsl(0 0% 0% / 0.06), 0 2px 4px -2px hsl(0 0% 0% / 0.04);
