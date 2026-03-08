@@ -102,6 +102,7 @@ const Dashboard = () => {
             <span className="text-gradient">Den</span><span>base</span>
           </Link>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             {isAdmin && (
               <Link to="/admin">
                 <Button variant="ghost" size="icon" className="text-primary"><Shield className="w-4 h-4" /></Button>
