@@ -13,6 +13,7 @@ import Marketplace from "./pages/Marketplace";
 import Messages from "./pages/Messages";
 import Matches from "./pages/Matches";
 import Sessions from "./pages/Sessions";
+import TutorProfile from "./pages/TutorProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
