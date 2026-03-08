@@ -103,6 +103,11 @@ const Dashboard = () => {
             <span className="text-gradient">Skill</span><span>Swap</span>
           </Link>
           <div className="flex items-center gap-3">
+            {isAdmin && (
+              <Link to="/admin">
+                <Button variant="ghost" size="icon" className="text-primary"><Shield className="w-4 h-4" /></Button>
+              </Link>
+            )}
             <Link to="/profile">
               <Button variant="ghost" size="icon"><User className="w-4 h-4" /></Button>
             </Link>
