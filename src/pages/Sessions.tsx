@@ -92,6 +92,13 @@ const Sessions = () => {
                       <span className="font-semibold text-primary">${s.price}</span>
                     )}
                   </div>
+                  {s.status === "scheduled" && (
+                    <div className="mt-3">
+                      <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" onClick={() => cancelSession(s.id)}>
+                        Cancel Session
+                      </Button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
