@@ -6,11 +6,9 @@ const Footer = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 py-16">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2 text-xl font-extrabold tracking-tight mb-4">
-            <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-              <span className="text-sm font-black text-primary-foreground">S</span>
-            </div>
+            <img src="/logo.png" alt="Denbase logo" className="w-8 h-8 rounded-lg object-contain" />
             <span>
-              <span className="text-gradient">Skill</span>Swap
+              <span className="text-gradient">Den</span>base
             </span>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
