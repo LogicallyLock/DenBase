@@ -97,10 +97,8 @@ const Dashboard = () => {
       <header className="sticky top-0 z-40 glass border-b border-border">
         <div className="container mx-auto px-6 flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-lg font-extrabold">
-            <div className="w-7 h-7 rounded-lg bg-hero-gradient flex items-center justify-center">
-              <span className="text-xs font-black text-primary-foreground">S</span>
-            </div>
-            <span className="text-gradient">Skill</span><span>Swap</span>
+            <img src="/logo.png" alt="Denbase logo" className="w-7 h-7 rounded-lg object-contain" />
+            <span className="text-gradient">Den</span><span>base</span>
           </Link>
           <div className="flex items-center gap-3">
             {isAdmin && (

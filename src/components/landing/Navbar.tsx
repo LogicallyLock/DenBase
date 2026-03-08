@@ -32,12 +32,10 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex h-[72px] items-center justify-between px-6">
         <a href="/" className="flex items-center gap-2 text-xl font-extrabold tracking-tight">
-          <div className="w-8 h-8 rounded-lg bg-hero-gradient flex items-center justify-center">
-            <span className="text-sm font-black text-primary-foreground">S</span>
-          </div>
+          <img src="/logo.png" alt="Denbase logo" className="w-8 h-8 rounded-lg object-contain" />
           <span>
-            <span className="text-gradient">Skill</span>
-            <span className="text-foreground">Swap</span>
+            <span className="text-gradient">Den</span>
+            <span className="text-foreground">base</span>
           </span>
         </a>
 
