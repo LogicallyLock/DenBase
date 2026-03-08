@@ -34,9 +34,11 @@ const MarketplaceSection = () => (
           <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
             Browse hundreds of professional tutors and coaches. Book sessions at transparent prices with verified reviews.
           </p>
-          <Button variant="hero" size="lg" className="mt-8">
-            Browse All Tutors <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link to="/marketplace">
+            <Button variant="hero" size="lg" className="mt-8">
+              Browse All Tutors <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </motion.div>
 
         <motion.div

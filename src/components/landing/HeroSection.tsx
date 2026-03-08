@@ -154,7 +154,9 @@ const HeroSection = () => {
         ))}
       </motion.div>
     </div>
+    <DemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
   </section>
-);
+  );
+};
 
 export default HeroSection;

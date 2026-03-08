@@ -27,9 +27,11 @@ const CTASection = () => (
               Get Started Free <ArrowRight className="w-5 h-5" />
             </Button>
           </Link>
-          <Button variant="outline" size="xl">
-            Talk to Sales
-          </Button>
+          <Link to="/auth">
+            <Button variant="outline" size="xl">
+              Talk to Sales
+            </Button>
+          </Link>
         </div>
         <p className="mt-6 text-xs text-muted-foreground">
           No credit card required · Free forever plan available · Cancel anytime
