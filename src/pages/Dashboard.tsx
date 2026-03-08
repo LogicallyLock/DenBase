@@ -14,6 +14,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [upcomingSessions, setUpcomingSessions] = useState<any[]>([]);
