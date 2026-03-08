@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
 const testimonials = [
-  { name: "Sarah Kim", role: "UX Designer at Figma", text: "SkillSwap completely changed how I learn. I taught UX design and learned Python from an engineer — all for free. The matching algorithm is incredibly accurate.", rating: 5, avatar: "👩‍🎨" },
+  { name: "Sarah Kim", role: "UX Designer at Figma", text: "Denbase completely changed how I learn. I taught UX design and learned Python from an engineer — all for free. The matching algorithm is incredibly accurate.", rating: 5, avatar: "👩‍🎨" },
   { name: "Marcus Thompson", role: "Software Engineer", text: "Found an amazing Spanish tutor through the marketplace. The booking experience is seamless, and the video call quality is excellent. Worth every penny.", rating: 5, avatar: "🧑‍💻" },
   { name: "Priya Ramesh", role: "Marketing Director", text: "I've been teaching digital marketing and learning photography in exchange. It's like a knowledge economy platform — brilliant concept, flawless execution.", rating: 5, avatar: "👩‍💼" },
 ];
