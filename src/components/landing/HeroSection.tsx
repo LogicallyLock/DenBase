@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Search, Sparkles, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImg from "@/assets/hero-illustration.png";
 
 const stats = [
