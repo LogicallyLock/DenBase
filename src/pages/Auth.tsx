@@ -196,7 +196,18 @@ const Auth = () => {
             <Button variant="hero" size="lg" className="w-full" disabled={loading}>
               {loading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
             </Button>
+
+            {isLogin && (
+              <button
+                type="button"
+                onClick={() => setShowForgotPassword(true)}
+                className="text-sm text-primary font-semibold hover:underline w-full text-center"
+              >
+                Forgot password?
+              </button>
+            )}
           </form>
+          )}
 
           <p className="text-center text-sm text-muted-foreground mt-6">
             {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
