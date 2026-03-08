@@ -18,24 +18,36 @@ const Dashboard = () => {
   const [matchCount, setMatchCount] = useState(0);
   const [teachSkills, setTeachSkills] = useState<any[]>([]);
   const [learnSkills, setLearnSkills] = useState<any[]>([]);
+  const [recentMatches, setRecentMatches] = useState<any[]>([]);
+
+  const fetchData = async () => {
+    if (!user) return;
+    const [profileRes, sessionsRes, matchesRes, skillsRes] = await Promise.all([
+      supabase.from("profiles").select("*").eq("user_id", user.id).single(),
+      supabase.from("sessions").select("*").or(`host_id.eq.${user.id},participant_id.eq.${user.id}`).eq("status", "scheduled").order("scheduled_at").limit(5),
+      supabase.from("matches").select("*").or(`user_a.eq.${user.id},user_b.eq.${user.id}`).order("created_at", { ascending: false }).limit(10),
+      supabase.from("user_skills").select("*, skills(name, category)").eq("user_id", user.id),
+    ]);
+    if (profileRes.data) setProfile(profileRes.data);
+    if (sessionsRes.data) setUpcomingSessions(sessionsRes.data);
+    if (matchesRes.data) {
+      setMatchCount(matchesRes.data.length);
+      // Enrich matches with profiles
+      const otherIds = matchesRes.data.map((m: any) => (m.user_a === user.id ? m.user_b : m.user_a));
+      const { data: profiles } = await supabase.from("profiles").select("*").in("user_id", otherIds);
+      setRecentMatches(matchesRes.data.map((m: any) => ({
+        ...m,
+        other_profile: profiles?.find((p: any) => p.user_id === (m.user_a === user.id ? m.user_b : m.user_a)),
+      })));
+    }
+    if (skillsRes.data) {
+      setTeachSkills(skillsRes.data.filter((s: any) => s.skill_type === "teach"));
+      setLearnSkills(skillsRes.data.filter((s: any) => s.skill_type === "learn"));
+    }
+  };
 
   useEffect(() => {
     if (!user) return;
-    const fetchData = async () => {
-      const [profileRes, sessionsRes, matchesRes, skillsRes] = await Promise.all([
-        supabase.from("profiles").select("*").eq("user_id", user.id).single(),
-        supabase.from("sessions").select("*").or(`host_id.eq.${user.id},participant_id.eq.${user.id}`).eq("status", "scheduled").order("scheduled_at").limit(5),
-        supabase.from("matches").select("id").or(`user_a.eq.${user.id},user_b.eq.${user.id}`),
-        supabase.from("user_skills").select("*, skills(name, category)").eq("user_id", user.id),
-      ]);
-      if (profileRes.data) setProfile(profileRes.data);
-      if (sessionsRes.data) setUpcomingSessions(sessionsRes.data);
-      if (matchesRes.data) setMatchCount(matchesRes.data.length);
-      if (skillsRes.data) {
-        setTeachSkills(skillsRes.data.filter((s: any) => s.skill_type === "teach"));
-        setLearnSkills(skillsRes.data.filter((s: any) => s.skill_type === "learn"));
-      }
-    };
     fetchData();
   }, [user]);
 
