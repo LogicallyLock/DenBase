@@ -93,7 +93,7 @@ const Auth = () => {
               {isLogin ? "Welcome back" : "Create your account"}
             </h1>
             <p className="text-muted-foreground mt-1">
-              {isLogin ? "Sign in to your SkillSwap account" : "Start your learning journey today"}
+              {isLogin ? "Sign in to your Denbase account" : "Start your learning journey today"}
             </p>
           </div>
 

@@ -25,7 +25,7 @@ const TestimonialsSection = () => (
           <span className="text-gradient">learners worldwide</span>
         </h2>
         <p className="mt-5 text-lg text-muted-foreground">
-          Join thousands of people already learning and growing on SkillSwap.
+          Join thousands of people already learning and growing on Denbase.
         </p>
       </motion.div>
 

@@ -26,7 +26,7 @@ const plans = [
     name: "Premium",
     price: "$19",
     period: "/month",
-    desc: "The complete SkillSwap experience with exclusive perks.",
+    desc: "The complete Denbase experience with exclusive perks.",
     features: ["Everything in Pro", "AI learning roadmap", "Unlimited sessions", "Profile boost", "Skill certification badge", "Priority support"],
     cta: "Go Premium",
     featured: false,
