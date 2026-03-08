@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -52,6 +53,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <Link to="/auth"><Button variant="ghost" size="default">Log In</Button></Link>
           <Link to="/auth"><Button variant="hero" size="default">
             Get Started <ArrowRight className="w-4 h-4" />
@@ -86,7 +88,8 @@ const Navbar = () => {
                   {l.label}
                 </a>
               ))}
-              <div className="flex gap-3 pt-3 mt-2 border-t border-border">
+              <div className="flex items-center gap-3 pt-3 mt-2 border-t border-border">
+                <ThemeToggle />
                 <Link to="/auth" className="flex-1"><Button variant="ghost" size="default" className="w-full" onClick={() => setMobileOpen(false)}>Log In</Button></Link>
                 <Link to="/auth" className="flex-1"><Button variant="hero" size="default" className="w-full" onClick={() => setMobileOpen(false)}>Get Started</Button></Link>
               </div>
