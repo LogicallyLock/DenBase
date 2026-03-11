@@ -1,0 +1,9 @@
+* @LogicallyLock/DevOps
+
+# Frontend
+/public/ @LogicallyLock/Frontend
+/src/ @LogicallyLock/Frontend
+
+# Backend
+/src/ @LogicallyLock/Backend
+/supabase/ @LogicallyLock/Backend
