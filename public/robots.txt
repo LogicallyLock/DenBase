@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /messages
+Disallow: /matches
+Disallow: /sessions
+
+Sitemap: https://denbase.lovable.app/sitemap.xml
