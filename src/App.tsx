@@ -18,6 +18,10 @@ import Messages from "./pages/Messages";
 import Matches from "./pages/Matches";
 import Sessions from "./pages/Sessions";
 import TutorProfile from "./pages/TutorProfile";
+import Credits from "./pages/Credits";
+import Projects from "./pages/Projects";
+import Challenges from "./pages/Challenges";
+import Leaderboard from "./pages/Leaderboard";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -71,6 +75,10 @@ const App = () => (
             <Route path="/matches" element={<ProtectedRoute><Matches /></ProtectedRoute>} />
             <Route path="/sessions" element={<ProtectedRoute><Sessions /></ProtectedRoute>} />
             <Route path="/tutor/:id" element={<ProtectedRoute><TutorProfile /></ProtectedRoute>} />
+            <Route path="/credits" element={<ProtectedRoute><Credits /></ProtectedRoute>} />
+            <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+            <Route path="/challenges" element={<ProtectedRoute><Challenges /></ProtectedRoute>} />
+            <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
             <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
             <Route path="/admin/matches" element={<AdminRoute><AdminMatches /></AdminRoute>} />

@@ -82,7 +82,7 @@ const Dashboard = () => {
     { icon: Users, label: "Matches", value: matchCount, color: "text-primary" },
     { icon: Calendar, label: "Sessions", value: profile?.total_sessions || 0, color: "text-accent" },
     { icon: Star, label: "Rating", value: profile?.avg_rating?.toFixed(1) || "—", color: "text-primary" },
-    { icon: TrendingUp, label: "Skills", value: teachSkills.length + learnSkills.length, color: "text-accent" },
+    { icon: TrendingUp, label: "Credits", value: (profile as any)?.credits_balance || 0, color: "text-accent" },
   ];
 
   const quickLinks = [
@@ -90,6 +90,13 @@ const Dashboard = () => {
     { icon: ArrowLeftRight, label: "Skill Exchange", href: "/matches", desc: "View your matches" },
     { icon: MessageSquare, label: "Messages", href: "/messages", desc: "Chat with partners" },
     { icon: Calendar, label: "Sessions", href: "/sessions", desc: "Upcoming sessions" },
+  ];
+
+  const extraLinks = [
+    { icon: TrendingUp, label: "SkillCredits", href: "/credits", desc: "View balance & history" },
+    { icon: Users, label: "Project Rooms", href: "/projects", desc: "Collaborate & build" },
+    { icon: Star, label: "Challenges", href: "/challenges", desc: "Earn credits" },
+    { icon: GraduationCap, label: "Leaderboard", href: "/leaderboard", desc: "Top contributors" },
   ];
 
   return (
@@ -160,7 +167,7 @@ const Dashboard = () => {
           </div>
 
           {/* Quick links */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             {quickLinks.map((l) => (
               <Link
                 key={l.label}
@@ -168,6 +175,19 @@ const Dashboard = () => {
                 className="group rounded-2xl border border-border bg-card p-5 hover:shadow-raised hover:border-primary/20 transition-all duration-200"
               >
                 <l.icon className="w-6 h-6 text-primary mb-3" />
+                <h3 className="text-sm font-bold mb-1">{l.label}</h3>
+                <p className="text-xs text-muted-foreground">{l.desc}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {extraLinks.map((l) => (
+              <Link
+                key={l.label}
+                to={l.href}
+                className="group rounded-2xl border border-border bg-card p-5 hover:shadow-raised hover:border-primary/20 transition-all duration-200"
+              >
+                <l.icon className="w-6 h-6 text-accent mb-3" />
                 <h3 className="text-sm font-bold mb-1">{l.label}</h3>
                 <p className="text-xs text-muted-foreground">{l.desc}</p>
               </Link>
