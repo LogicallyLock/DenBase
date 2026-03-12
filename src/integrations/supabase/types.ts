@@ -160,6 +160,116 @@ export type Database = {
         }
         Relationships: []
       }
+      challenge_submissions: {
+        Row: {
+          challenge_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          reviewed_at: string | null
+          status: string
+          submission_url: string | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          status?: string
+          submission_url?: string | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          status?: string
+          submission_url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_submissions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          created_at: string
+          created_by: string
+          credit_reward: number
+          deadline: string | null
+          description: string
+          difficulty: string
+          id: string
+          skill_category: string | null
+          status: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          credit_reward?: number
+          deadline?: string | null
+          description?: string
+          difficulty?: string
+          id?: string
+          skill_category?: string | null
+          status?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          credit_reward?: number
+          deadline?: string | null
+          description?: string
+          difficulty?: string
+          id?: string
+          skill_category?: string | null
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      credit_transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          id: string
+          reference_id: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          reference_id?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          reference_id?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       matches: {
         Row: {
           compatibility_score: number | null
@@ -232,15 +342,20 @@ export type Database = {
           avg_rating: number | null
           bio: string | null
           created_at: string
+          credits_balance: number
           experience_level: string | null
           full_name: string | null
+          github_url: string | null
           id: string
           is_tutor: boolean | null
+          linkedin_url: string | null
           session_price: number | null
+          sessions_attended: number
           total_sessions: number | null
           tutor_category: string | null
           updated_at: string
           user_id: string
+          website_url: string | null
         }
         Insert: {
           availability?: string | null
@@ -248,15 +363,20 @@ export type Database = {
           avg_rating?: number | null
           bio?: string | null
           created_at?: string
+          credits_balance?: number
           experience_level?: string | null
           full_name?: string | null
+          github_url?: string | null
           id?: string
           is_tutor?: boolean | null
+          linkedin_url?: string | null
           session_price?: number | null
+          sessions_attended?: number
           total_sessions?: number | null
           tutor_category?: string | null
           updated_at?: string
           user_id: string
+          website_url?: string | null
         }
         Update: {
           availability?: string | null
@@ -264,15 +384,97 @@ export type Database = {
           avg_rating?: number | null
           bio?: string | null
           created_at?: string
+          credits_balance?: number
           experience_level?: string | null
           full_name?: string | null
+          github_url?: string | null
           id?: string
           is_tutor?: boolean | null
+          linkedin_url?: string | null
           session_price?: number | null
+          sessions_attended?: number
           total_sessions?: number | null
           tutor_category?: string | null
           updated_at?: string
           user_id?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
+      project_members: {
+        Row: {
+          contributions: number
+          id: string
+          joined_at: string
+          project_id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          contributions?: number
+          id?: string
+          joined_at?: string
+          project_id: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          contributions?: number
+          id?: string
+          joined_at?: string
+          project_id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          created_at: string
+          creator_id: string
+          description: string
+          duration: string | null
+          github_repo: string | null
+          id: string
+          max_collaborators: number | null
+          skills_required: string[] | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          description?: string
+          duration?: string | null
+          github_repo?: string | null
+          id?: string
+          max_collaborators?: number | null
+          skills_required?: string[] | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          description?: string
+          duration?: string | null
+          github_repo?: string | null
+          id?: string
+          max_collaborators?: number | null
+          skills_required?: string[] | null
+          status?: string
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
