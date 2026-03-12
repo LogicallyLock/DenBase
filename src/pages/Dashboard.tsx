@@ -82,7 +82,7 @@ const Dashboard = () => {
     { icon: Users, label: "Matches", value: matchCount, color: "text-primary" },
     { icon: Calendar, label: "Sessions", value: profile?.total_sessions || 0, color: "text-accent" },
     { icon: Star, label: "Rating", value: profile?.avg_rating?.toFixed(1) || "—", color: "text-primary" },
-    { icon: TrendingUp, label: "Skills", value: teachSkills.length + learnSkills.length, color: "text-accent" },
+    { icon: TrendingUp, label: "Credits", value: (profile as any)?.credits_balance || 0, color: "text-accent" },
   ];
 
   const quickLinks = [
