@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { ArrowLeft, Save, Plus, X, GraduationCap, BookOpen } from "lucide-react";
+import { ArrowLeft, Save, Plus, X, GraduationCap, BookOpen, Github, Linkedin, Globe } from "lucide-react";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -50,6 +50,9 @@ const Profile = () => {
       is_tutor: profile.is_tutor,
       tutor_category: profile.tutor_category,
       session_price: profile.session_price,
+      github_url: profile.github_url,
+      linkedin_url: profile.linkedin_url,
+      website_url: profile.website_url,
     }).eq("user_id", user.id);
     setLoading(false);
     if (error) toast.error(error.message);
@@ -58,15 +61,8 @@ const Profile = () => {
 
   const addSkill = async (skillId: string, type: "teach" | "learn") => {
     if (!user) return;
-    const { error } = await supabase.from("user_skills").insert({
-      user_id: user.id, skill_id: skillId, skill_type: type,
-    });
-    if (error) {
-      if (error.code === "23505") toast.error("Skill already added");
-      else toast.error(error.message);
-      return;
-    }
-    // Refetch
+    const { error } = await supabase.from("user_skills").insert({ user_id: user.id, skill_id: skillId, skill_type: type });
+    if (error) { toast.error(error.code === "23505" ? "Skill already added" : error.message); return; }
     const { data } = await supabase.from("user_skills").select("*, skills(name, category)").eq("user_id", user.id);
     if (data) {
       setTeachSkills(data.filter((s: any) => s.skill_type === "teach"));
@@ -84,9 +80,7 @@ const Profile = () => {
     toast.success("Skill removed");
   };
 
-  const filteredSkills = allSkills.filter((s) =>
-    s.name.toLowerCase().includes(skillSearch.toLowerCase())
-  );
+  const filteredSkills = allSkills.filter((s) => s.name.toLowerCase().includes(skillSearch.toLowerCase()));
 
   if (!profile) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading...</div>;
 
@@ -139,6 +133,25 @@ const Profile = () => {
               </div>
             </div>
 
+            {/* Portfolio Links */}
+            <div className="rounded-2xl border border-border p-5">
+              <h3 className="text-sm font-bold mb-4">Portfolio Links</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Github className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  <Input value={profile.github_url || ""} onChange={(e) => setProfile({ ...profile, github_url: e.target.value })} placeholder="https://github.com/username" />
+                </div>
+                <div className="flex items-center gap-3">
+                  <Linkedin className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  <Input value={profile.linkedin_url || ""} onChange={(e) => setProfile({ ...profile, linkedin_url: e.target.value })} placeholder="https://linkedin.com/in/username" />
+                </div>
+                <div className="flex items-center gap-3">
+                  <Globe className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  <Input value={profile.website_url || ""} onChange={(e) => setProfile({ ...profile, website_url: e.target.value })} placeholder="https://yourwebsite.com" />
+                </div>
+              </div>
+            </div>
+
             {/* Tutor toggle */}
             <div className="rounded-2xl border border-border p-5">
               <label className="flex items-center gap-3 cursor-pointer">
@@ -160,8 +173,8 @@ const Profile = () => {
                     <Input value={profile.tutor_category || ""} onChange={(e) => setProfile({ ...profile, tutor_category: e.target.value })} placeholder="e.g. Programming" />
                   </div>
                   <div className="space-y-2">
-                    <Label>Session Price ($)</Label>
-                    <Input type="number" value={profile.session_price || ""} onChange={(e) => setProfile({ ...profile, session_price: parseFloat(e.target.value) || null })} placeholder="50" />
+                    <Label>Session Price (credits)</Label>
+                    <Input type="number" value={profile.session_price || ""} onChange={(e) => setProfile({ ...profile, session_price: parseFloat(e.target.value) || null })} placeholder="10" />
                   </div>
                 </div>
               )}
@@ -195,14 +208,10 @@ const Profile = () => {
                   </div>
                   {addingType === type && (
                     <div className="mt-4">
-                     <Input placeholder="Search skills..." value={skillSearch} onChange={(e) => setSkillSearch(e.target.value)} className="mb-2" />
+                      <Input placeholder="Search skills..." value={skillSearch} onChange={(e) => setSkillSearch(e.target.value)} className="mb-2" />
                       <div className="max-h-40 overflow-y-auto space-y-1">
                         {filteredSkills.slice(0, 10).map((s) => (
-                          <button
-                            key={s.id}
-                            onClick={() => addSkill(s.id, type)}
-                            className="w-full text-left px-3 py-2 text-sm rounded-lg hover:bg-secondary transition-colors"
-                          >
+                          <button key={s.id} onClick={() => addSkill(s.id, type)} className="w-full text-left px-3 py-2 text-sm rounded-lg hover:bg-secondary transition-colors">
                             {s.name} <span className="text-muted-foreground">· {s.category}</span>
                           </button>
                         ))}
