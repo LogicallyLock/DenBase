@@ -167,7 +167,7 @@ const Dashboard = () => {
           </div>
 
           {/* Quick links */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             {quickLinks.map((l) => (
               <Link
                 key={l.label}
@@ -175,6 +175,19 @@ const Dashboard = () => {
                 className="group rounded-2xl border border-border bg-card p-5 hover:shadow-raised hover:border-primary/20 transition-all duration-200"
               >
                 <l.icon className="w-6 h-6 text-primary mb-3" />
+                <h3 className="text-sm font-bold mb-1">{l.label}</h3>
+                <p className="text-xs text-muted-foreground">{l.desc}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {extraLinks.map((l) => (
+              <Link
+                key={l.label}
+                to={l.href}
+                className="group rounded-2xl border border-border bg-card p-5 hover:shadow-raised hover:border-primary/20 transition-all duration-200"
+              >
+                <l.icon className="w-6 h-6 text-accent mb-3" />
                 <h3 className="text-sm font-bold mb-1">{l.label}</h3>
                 <p className="text-xs text-muted-foreground">{l.desc}</p>
               </Link>
