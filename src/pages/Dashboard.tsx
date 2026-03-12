@@ -92,6 +92,13 @@ const Dashboard = () => {
     { icon: Calendar, label: "Sessions", href: "/sessions", desc: "Upcoming sessions" },
   ];
 
+  const extraLinks = [
+    { icon: TrendingUp, label: "SkillCredits", href: "/credits", desc: "View balance & history" },
+    { icon: Users, label: "Project Rooms", href: "/projects", desc: "Collaborate & build" },
+    { icon: Star, label: "Challenges", href: "/challenges", desc: "Earn credits" },
+    { icon: GraduationCap, label: "Leaderboard", href: "/leaderboard", desc: "Top contributors" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Top nav */}
