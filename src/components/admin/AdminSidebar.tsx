@@ -2,7 +2,7 @@ import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
   LayoutDashboard, Users, ArrowLeftRight, Calendar,
-  BookOpen, Shield, ArrowLeft, FileText, Briefcase
+  BookOpen, Shield, ArrowLeft, FileText, Briefcase, Trophy
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
@@ -19,6 +19,7 @@ const items = [
   { title: "Roles", url: "/admin/roles", icon: Shield },
   { title: "Blog", url: "/admin/blog", icon: FileText },
   { title: "Careers", url: "/admin/careers", icon: Briefcase },
+  { title: "Challenges", url: "/admin/challenges", icon: Trophy },
 ];
 
 export function AdminSidebar() {

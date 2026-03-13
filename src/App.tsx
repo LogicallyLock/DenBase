@@ -42,6 +42,7 @@ import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
 import AdminCareers from "./pages/admin/AdminCareers";
 import AdminCareerEditor from "./pages/admin/AdminCareerEditor";
 import AdminApplications from "./pages/admin/AdminApplications";
+import AdminChallenges from "./pages/admin/AdminChallenges";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -90,6 +91,7 @@ const App = () => (
             <Route path="/admin/careers" element={<AdminRoute><AdminCareers /></AdminRoute>} />
             <Route path="/admin/careers/:id" element={<AdminRoute><AdminCareerEditor /></AdminRoute>} />
             <Route path="/admin/applications" element={<AdminRoute><AdminApplications /></AdminRoute>} />
+            <Route path="/admin/challenges" element={<AdminRoute><AdminChallenges /></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

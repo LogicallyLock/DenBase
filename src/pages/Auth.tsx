@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ import { motion } from "framer-motion";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref");
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +22,11 @@ const Auth = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [resetLoading, setResetLoading] = useState(false);
+
+  // If referral code in URL, switch to signup
+  useEffect(() => {
+    if (referralCode) setIsLogin(false);
+  }, [referralCode]);
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,11 +60,27 @@ const Auth = () => {
           email,
           password,
           options: {
-            data: { full_name: fullName },
+            data: { full_name: fullName, referral_code: referralCode || undefined },
             emailRedirectTo: window.location.origin,
           },
         });
         if (error) throw error;
+
+        // Process referral after signup
+        if (referralCode) {
+          // Find referrer by referral_code and award them credits
+          const { data: referrer } = await supabase.from("profiles").select("user_id, credits_balance").eq("referral_code", referralCode).maybeSingle();
+          if (referrer) {
+            await supabase.from("credit_transactions").insert({
+              user_id: (referrer as any).user_id, amount: 10, type: "referral_bonus",
+              description: "Referral bonus - new user signup",
+            });
+            await supabase.from("profiles").update({
+              credits_balance: ((referrer as any).credits_balance || 0) + 10,
+            }).eq("user_id", (referrer as any).user_id);
+          }
+        }
+
         toast.success("Account created successfully!");
         navigate("/dashboard");
       }

@@ -349,6 +349,8 @@ export type Database = {
           id: string
           is_tutor: boolean | null
           linkedin_url: string | null
+          referral_code: string | null
+          referred_by: string | null
           session_price: number | null
           sessions_attended: number
           total_sessions: number | null
@@ -370,6 +372,8 @@ export type Database = {
           id?: string
           is_tutor?: boolean | null
           linkedin_url?: string | null
+          referral_code?: string | null
+          referred_by?: string | null
           session_price?: number | null
           sessions_attended?: number
           total_sessions?: number | null
@@ -391,6 +395,8 @@ export type Database = {
           id?: string
           is_tutor?: boolean | null
           linkedin_url?: string | null
+          referral_code?: string | null
+          referred_by?: string | null
           session_price?: number | null
           sessions_attended?: number
           total_sessions?: number | null

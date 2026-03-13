@@ -3,8 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { ArrowLeft, Coins, TrendingUp, TrendingDown, Gift, Users, Trophy, BookOpen } from "lucide-react";
+import { ArrowLeft, Coins, TrendingUp, TrendingDown, Gift, Users, Trophy, BookOpen, Copy, Check } from "lucide-react";
+import { toast } from "sonner";
 
 const typeIcons: Record<string, any> = {
   session_earned: TrendingUp,
@@ -28,8 +30,10 @@ const Credits = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [balance, setBalance] = useState(0);
+  const [referralCode, setReferralCode] = useState("");
   const [transactions, setTransactions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -38,7 +42,10 @@ const Credits = () => {
         supabase.from("profiles").select("credits_balance").eq("user_id", user.id).single(),
         supabase.from("credit_transactions").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(50),
       ]);
-      if (profileRes.data) setBalance((profileRes.data as any).credits_balance || 0);
+      if (profileRes.data) {
+        setBalance((profileRes.data as any).credits_balance || 0);
+        setReferralCode((profileRes.data as any).referral_code || "");
+      }
       if (txRes.data) setTransactions(txRes.data);
       setLoading(false);
     };
@@ -73,7 +80,26 @@ const Credits = () => {
               <div>
                 <p className="text-xs opacity-70">Total Earned</p>
                 <p className="text-lg font-bold">+{totalEarned}</p>
+          </div>
+
+          {/* Referral link */}
+          {referralCode && (
+            <div className="rounded-2xl border border-border bg-card p-6 mb-8">
+              <h2 className="text-lg font-bold mb-2">Invite Friends, Earn Credits</h2>
+              <p className="text-xs text-muted-foreground mb-4">Share your referral link. You'll earn 10 credits for every friend who signs up!</p>
+              <div className="flex gap-2">
+                <Input readOnly value={`${window.location.origin}/auth?ref=${referralCode}`} className="font-mono text-xs" />
+                <Button variant="outline" size="sm" onClick={() => {
+                  navigator.clipboard.writeText(`${window.location.origin}/auth?ref=${referralCode}`);
+                  setCopied(true);
+                  toast.success("Copied to clipboard!");
+                  setTimeout(() => setCopied(false), 2000);
+                }}>
+                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </Button>
               </div>
+            </div>
+          )}
               <div>
                 <p className="text-xs opacity-70">Total Spent</p>
                 <p className="text-lg font-bold">-{totalSpent}</p>

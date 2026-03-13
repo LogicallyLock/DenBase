@@ -100,6 +100,17 @@ const TutorProfile = () => {
     }
     setBooking(true);
 
+    const creditCost = Math.round((profile.session_price || 10) * (duration / 60));
+
+    // Check credit balance
+    const { data: myProfile } = await supabase.from("profiles").select("credits_balance").eq("user_id", user.id).single();
+    const currentBalance = (myProfile as any)?.credits_balance || 0;
+    if (currentBalance < creditCost) {
+      toast.error(`Insufficient credits. You need ${creditCost} but have ${currentBalance}.`);
+      setBooking(false);
+      return;
+    }
+
     const scheduledAt = new Date(selectedDate);
     const [hours, minutes] = selectedTime.split(":").map(Number);
     scheduledAt.setHours(hours, minutes, 0, 0);
@@ -111,18 +122,24 @@ const TutorProfile = () => {
       session_type: sessionType,
       title: sessionTitle || `Session with ${profile.full_name}`,
       duration_minutes: duration,
-      price: profile.session_price || 0,
+      price: creditCost,
       status: "scheduled",
     });
 
-    if (error) toast.error(error.message);
-    else {
-      toast.success("Session booked successfully!");
-      setShowBooking(false);
-      setSelectedDate(undefined);
-      setSelectedTime("");
-      setSessionTitle("");
-    }
+    if (error) { toast.error(error.message); setBooking(false); return; }
+
+    // Deduct credits
+    await supabase.from("profiles").update({ credits_balance: currentBalance - creditCost }).eq("user_id", user.id);
+    await supabase.from("credit_transactions").insert({
+      user_id: user.id, amount: -creditCost, type: "session_spent",
+      description: `Booked session with ${profile.full_name}`,
+    });
+
+    toast.success(`Session booked! ${creditCost} credits deducted.`);
+    setShowBooking(false);
+    setSelectedDate(undefined);
+    setSelectedTime("");
+    setSessionTitle("");
     setBooking(false);
   };
 
@@ -368,13 +385,13 @@ const TutorProfile = () => {
                   </div>
                 )}
 
-                {/* Price info */}
-                {profile.session_price > 0 && (
-                  <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
-                    <span className="text-sm text-muted-foreground">Session Price</span>
-                    <span className="text-lg font-bold text-primary">${profile.session_price}</span>
-                  </div>
-                )}
+                {/* Credit cost info */}
+                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
+                  <span className="text-sm text-muted-foreground">Credit Cost</span>
+                  <span className="text-lg font-bold text-primary">
+                    {Math.round((profile.session_price || 10) * (duration / 60))} credits
+                  </span>
+                </div>
 
                 <Button
                   variant="hero"
