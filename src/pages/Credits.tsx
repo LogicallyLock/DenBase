@@ -80,7 +80,26 @@ const Credits = () => {
               <div>
                 <p className="text-xs opacity-70">Total Earned</p>
                 <p className="text-lg font-bold">+{totalEarned}</p>
+          </div>
+
+          {/* Referral link */}
+          {referralCode && (
+            <div className="rounded-2xl border border-border bg-card p-6 mb-8">
+              <h2 className="text-lg font-bold mb-2">Invite Friends, Earn Credits</h2>
+              <p className="text-xs text-muted-foreground mb-4">Share your referral link. You'll earn 10 credits for every friend who signs up!</p>
+              <div className="flex gap-2">
+                <Input readOnly value={`${window.location.origin}/auth?ref=${referralCode}`} className="font-mono text-xs" />
+                <Button variant="outline" size="sm" onClick={() => {
+                  navigator.clipboard.writeText(`${window.location.origin}/auth?ref=${referralCode}`);
+                  setCopied(true);
+                  toast.success("Copied to clipboard!");
+                  setTimeout(() => setCopied(false), 2000);
+                }}>
+                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </Button>
               </div>
+            </div>
+          )}
               <div>
                 <p className="text-xs opacity-70">Total Spent</p>
                 <p className="text-lg font-bold">-{totalSpent}</p>
