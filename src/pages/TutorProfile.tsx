@@ -385,13 +385,13 @@ const TutorProfile = () => {
                   </div>
                 )}
 
-                {/* Price info */}
-                {profile.session_price > 0 && (
-                  <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
-                    <span className="text-sm text-muted-foreground">Session Price</span>
-                    <span className="text-lg font-bold text-primary">${profile.session_price}</span>
-                  </div>
-                )}
+                {/* Credit cost info */}
+                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
+                  <span className="text-sm text-muted-foreground">Credit Cost</span>
+                  <span className="text-lg font-bold text-primary">
+                    {Math.round((profile.session_price || 10) * (duration / 60))} credits
+                  </span>
+                </div>
 
                 <Button
                   variant="hero"

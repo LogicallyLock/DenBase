@@ -19,6 +19,7 @@ const items = [
   { title: "Roles", url: "/admin/roles", icon: Shield },
   { title: "Blog", url: "/admin/blog", icon: FileText },
   { title: "Careers", url: "/admin/careers", icon: Briefcase },
+  { title: "Challenges", url: "/admin/challenges", icon: Trophy },
 ];
 
 export function AdminSidebar() {
