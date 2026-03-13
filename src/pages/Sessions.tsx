@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock, Video } from "lucide-react";
+import { createNotification } from "@/lib/notifications";
 
 const Sessions = () => {
   const { user } = useAuth();
