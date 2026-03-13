@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAdmin } from "@/hooks/useAdmin";
+import NotificationBell from "@/components/NotificationBell";
+import AIMatchSuggestions from "@/components/AIMatchSuggestions";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
