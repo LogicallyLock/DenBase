@@ -60,11 +60,27 @@ const Auth = () => {
           email,
           password,
           options: {
-            data: { full_name: fullName },
+            data: { full_name: fullName, referral_code: referralCode || undefined },
             emailRedirectTo: window.location.origin,
           },
         });
         if (error) throw error;
+
+        // Process referral after signup
+        if (referralCode) {
+          // Find referrer by referral_code and award them credits
+          const { data: referrer } = await supabase.from("profiles").select("user_id, credits_balance").eq("referral_code", referralCode).maybeSingle();
+          if (referrer) {
+            await supabase.from("credit_transactions").insert({
+              user_id: (referrer as any).user_id, amount: 10, type: "referral_bonus",
+              description: "Referral bonus - new user signup",
+            });
+            await supabase.from("profiles").update({
+              credits_balance: ((referrer as any).credits_balance || 0) + 10,
+            }).eq("user_id", (referrer as any).user_id);
+          }
+        }
+
         toast.success("Account created successfully!");
         navigate("/dashboard");
       }
