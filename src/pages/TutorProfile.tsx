@@ -11,6 +11,7 @@ import {
   ArrowLeft, Star, DollarSign, Clock, BookOpen, UserCheck,
   CalendarDays, X, Video, Users, Repeat
 } from "lucide-react";
+import { createNotification } from "@/lib/notifications";
 
 const SESSION_TYPES = [
   { value: "video", label: "Video Call", icon: Video },
