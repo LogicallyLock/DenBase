@@ -33,12 +33,26 @@ Project-wide constraints and design decisions for the SkillSwap platform.
 - Referral link: /auth?ref={code} - auto-switches to signup mode
 - On signup with referral, referrer gets +10 credits (referral_bonus)
 
+### Notifications System
+- notifications table with RLS (user can CRUD own notifications)
+- Realtime enabled on notifications table
+- NotificationBell component with bell icon + unread badge + dropdown
+- createNotification() helper in src/lib/notifications.ts
+- Triggers: session booked, credits deducted, credits earned on session completion
+
+### AI Skill Matching
+- Edge function: ai-skill-match (verify_jwt=false, auth via header)
+- Uses Lovable AI (google/gemini-3-flash-preview) with tool calling for structured output
+- Analyzes teach/learn skill overlap between users
+- AIMatchSuggestions component on Dashboard (on-demand fetch)
+
 ### New Tables Added
 - credit_transactions: user_id, amount, type, description, reference_id
 - projects: title, description, skills_required[], max_collaborators, duration, status, creator_id, github_repo
 - project_members: project_id, user_id, role, contributions
 - challenges: title, description, skill_category, difficulty, credit_reward, deadline, status, created_by
 - challenge_submissions: challenge_id, user_id, submission_url, notes, status
+- notifications: user_id, type, title, message, read, reference_id (realtime enabled)
 
 ### Profile Updates
 - Portfolio links: github_url, linkedin_url, website_url added to profiles

@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.razorpay-verify-payment]
 verify_jwt = false
+
+[functions.ai-skill-match]
+verify_jwt = false

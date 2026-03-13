@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock, Video } from "lucide-react";
+import { createNotification } from "@/lib/notifications";
 
 const Sessions = () => {
   const { user } = useAuth();
@@ -76,6 +77,8 @@ const Sessions = () => {
       }).eq("user_id", session.participant_id);
     }
 
+    // Notify host about credits earned
+    await createNotification(session.host_id, "credits_earned", "Credits Earned!", `You earned ${earnAmount} credits for completing a session.`);
     toast.success("Session completed! Credits awarded to teacher.");
     fetchSessions();
   };

@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAdmin } from "@/hooks/useAdmin";
+import NotificationBell from "@/components/NotificationBell";
+import AIMatchSuggestions from "@/components/AIMatchSuggestions";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
@@ -109,6 +111,7 @@ const Dashboard = () => {
             <span className="text-gradient">Den</span><span>base</span>
           </Link>
           <div className="flex items-center gap-3">
+            <NotificationBell />
             <ThemeToggle />
             {isAdmin && (
               <Link to="/admin">
@@ -245,8 +248,11 @@ const Dashboard = () => {
             )}
           </div>
 
+          {/* AI Skill Matches */}
+          <AIMatchSuggestions />
+
           {/* Upcoming sessions */}
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl border border-border bg-card p-6 mt-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold">Upcoming Sessions</h2>
               <Link to="/sessions" className="text-xs text-primary font-medium hover:underline">View all</Link>
