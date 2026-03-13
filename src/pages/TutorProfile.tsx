@@ -100,6 +100,17 @@ const TutorProfile = () => {
     }
     setBooking(true);
 
+    const creditCost = Math.round((profile.session_price || 10) * (duration / 60));
+
+    // Check credit balance
+    const { data: myProfile } = await supabase.from("profiles").select("credits_balance").eq("user_id", user.id).single();
+    const currentBalance = (myProfile as any)?.credits_balance || 0;
+    if (currentBalance < creditCost) {
+      toast.error(`Insufficient credits. You need ${creditCost} but have ${currentBalance}.`);
+      setBooking(false);
+      return;
+    }
+
     const scheduledAt = new Date(selectedDate);
     const [hours, minutes] = selectedTime.split(":").map(Number);
     scheduledAt.setHours(hours, minutes, 0, 0);
@@ -111,18 +122,24 @@ const TutorProfile = () => {
       session_type: sessionType,
       title: sessionTitle || `Session with ${profile.full_name}`,
       duration_minutes: duration,
-      price: profile.session_price || 0,
+      price: creditCost,
       status: "scheduled",
     });
 
-    if (error) toast.error(error.message);
-    else {
-      toast.success("Session booked successfully!");
-      setShowBooking(false);
-      setSelectedDate(undefined);
-      setSelectedTime("");
-      setSessionTitle("");
-    }
+    if (error) { toast.error(error.message); setBooking(false); return; }
+
+    // Deduct credits
+    await supabase.from("profiles").update({ credits_balance: currentBalance - creditCost }).eq("user_id", user.id);
+    await supabase.from("credit_transactions").insert({
+      user_id: user.id, amount: -creditCost, type: "session_spent",
+      description: `Booked session with ${profile.full_name}`,
+    });
+
+    toast.success(`Session booked! ${creditCost} credits deducted.`);
+    setShowBooking(false);
+    setSelectedDate(undefined);
+    setSelectedTime("");
+    setSessionTitle("");
     setBooking(false);
   };
 
