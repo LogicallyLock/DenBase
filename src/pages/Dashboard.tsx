@@ -248,8 +248,11 @@ const Dashboard = () => {
             )}
           </div>
 
+          {/* AI Skill Matches */}
+          <AIMatchSuggestions />
+
           {/* Upcoming sessions */}
-          <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="rounded-2xl border border-border bg-card p-6 mt-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold">Upcoming Sessions</h2>
               <Link to="/sessions" className="text-xs text-primary font-medium hover:underline">View all</Link>

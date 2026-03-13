@@ -136,6 +136,11 @@ const TutorProfile = () => {
       description: `Booked session with ${profile.full_name}`,
     });
 
+    // Notify the host
+    await createNotification(profile.user_id, "session_booked", "New Session Booked", `${profile.full_name ? "Someone" : "A user"} booked a ${duration}min session with you.`);
+    // Notify self
+    await createNotification(user.id, "credits_earned", "Credits Deducted", `${creditCost} credits spent on session with ${profile.full_name}.`);
+
     toast.success(`Session booked! ${creditCost} credits deducted.`);
     setShowBooking(false);
     setSelectedDate(undefined);
