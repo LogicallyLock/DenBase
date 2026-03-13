@@ -42,7 +42,10 @@ const Credits = () => {
         supabase.from("profiles").select("credits_balance").eq("user_id", user.id).single(),
         supabase.from("credit_transactions").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(50),
       ]);
-      if (profileRes.data) setBalance((profileRes.data as any).credits_balance || 0);
+      if (profileRes.data) {
+        setBalance((profileRes.data as any).credits_balance || 0);
+        setReferralCode((profileRes.data as any).referral_code || "");
+      }
       if (txRes.data) setTransactions(txRes.data);
       setLoading(false);
     };
