@@ -136,7 +136,10 @@ const Sessions = () => {
                     )}
                   </div>
                   {s.status === "scheduled" && (
-                    <div className="mt-3">
+                    <div className="mt-3 flex gap-2">
+                      <Button variant="default" size="sm" onClick={() => completeSession(s.id)}>
+                        Mark Complete
+                      </Button>
                       <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" onClick={() => cancelSession(s.id)}>
                         Cancel Session
                       </Button>
