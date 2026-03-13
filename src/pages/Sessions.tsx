@@ -29,12 +29,55 @@ const Sessions = () => {
   };
 
   const cancelSession = async (sessionId: string) => {
+    const session = sessions.find(s => s.id === sessionId);
     const { error } = await supabase.from("sessions").update({ status: "cancelled" }).eq("id", sessionId);
-    if (error) toast.error(error.message);
-    else {
-      toast.success("Session cancelled");
-      fetchSessions();
+    if (error) { toast.error(error.message); return; }
+    
+    // Refund credits to participant
+    if (session && session.price && session.participant_id) {
+      const { data: pProfile } = await supabase.from("profiles").select("credits_balance").eq("user_id", session.participant_id).single();
+      if (pProfile) {
+        await supabase.from("profiles").update({ credits_balance: (pProfile as any).credits_balance + Number(session.price) }).eq("user_id", session.participant_id);
+        await supabase.from("credit_transactions").insert({
+          user_id: session.participant_id, amount: Number(session.price), type: "session_earned",
+          description: "Session cancelled - refund",
+        });
+      }
     }
+    toast.success("Session cancelled & credits refunded");
+    fetchSessions();
+  };
+
+  const completeSession = async (sessionId: string) => {
+    const session = sessions.find(s => s.id === sessionId);
+    if (!session) return;
+    const { error } = await supabase.from("sessions").update({ status: "completed" }).eq("id", sessionId);
+    if (error) { toast.error(error.message); return; }
+
+    // Award credits to host (teacher)
+    const earnAmount = Math.round((Number(session.price) || 10) * 1);
+    const { data: hostProfile } = await supabase.from("profiles").select("credits_balance, total_sessions").eq("user_id", session.host_id).single();
+    if (hostProfile) {
+      await supabase.from("profiles").update({
+        credits_balance: (hostProfile as any).credits_balance + earnAmount,
+        total_sessions: ((hostProfile as any).total_sessions || 0) + 1,
+      }).eq("user_id", session.host_id);
+      await supabase.from("credit_transactions").insert({
+        user_id: session.host_id, amount: earnAmount, type: "session_earned",
+        description: "Session teaching reward",
+      });
+    }
+
+    // Update participant sessions_attended
+    const { data: partProfile } = await supabase.from("profiles").select("sessions_attended").eq("user_id", session.participant_id).single();
+    if (partProfile) {
+      await supabase.from("profiles").update({
+        sessions_attended: ((partProfile as any).sessions_attended || 0) + 1,
+      }).eq("user_id", session.participant_id);
+    }
+
+    toast.success("Session completed! Credits awarded to teacher.");
+    fetchSessions();
   };
 
   const statusColor: Record<string, string> = {
