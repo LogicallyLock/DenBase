@@ -43,7 +43,7 @@ const AdminChallenges = () => {
 
   const handleSave = async () => {
     if (!form.title.trim()) { toast.error("Title required"); return; }
-    const payload = {
+    const basePayload = {
       title: form.title,
       description: form.description,
       skill_category: form.skill_category || null,
@@ -51,12 +51,11 @@ const AdminChallenges = () => {
       credit_reward: form.credit_reward,
       deadline: form.deadline || null,
       status: form.status,
-      ...(editing ? {} : { created_by: user!.id }),
     };
 
     const { error } = editing
-      ? await supabase.from("challenges").update(payload).eq("id", editing.id)
-      : await supabase.from("challenges").insert([payload]);
+      ? await supabase.from("challenges").update(basePayload).eq("id", editing.id)
+      : await supabase.from("challenges").insert([{ ...basePayload, created_by: user!.id }]);
 
     if (error) toast.error(error.message);
     else { toast.success(editing ? "Challenge updated" : "Challenge created"); resetForm(); fetchData(); }
