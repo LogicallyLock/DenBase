@@ -3,8 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { ArrowLeft, Coins, TrendingUp, TrendingDown, Gift, Users, Trophy, BookOpen } from "lucide-react";
+import { ArrowLeft, Coins, TrendingUp, TrendingDown, Gift, Users, Trophy, BookOpen, Copy, Check } from "lucide-react";
+import { toast } from "sonner";
 
 const typeIcons: Record<string, any> = {
   session_earned: TrendingUp,
