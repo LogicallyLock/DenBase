@@ -56,7 +56,7 @@ const AdminChallenges = () => {
 
     const { error } = editing
       ? await supabase.from("challenges").update(payload).eq("id", editing.id)
-      : await supabase.from("challenges").insert(payload);
+      : await supabase.from("challenges").insert([payload]);
 
     if (error) toast.error(error.message);
     else { toast.success(editing ? "Challenge updated" : "Challenge created"); resetForm(); fetchData(); }
