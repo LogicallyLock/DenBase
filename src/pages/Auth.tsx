@@ -11,6 +11,8 @@ import { motion } from "framer-motion";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref");
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +22,11 @@ const Auth = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [resetLoading, setResetLoading] = useState(false);
+
+  // If referral code in URL, switch to signup
+  useEffect(() => {
+    if (referralCode) setIsLogin(false);
+  }, [referralCode]);
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
