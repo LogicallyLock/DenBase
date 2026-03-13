@@ -111,6 +111,7 @@ const Dashboard = () => {
             <span className="text-gradient">Den</span><span>base</span>
           </Link>
           <div className="flex items-center gap-3">
+            <NotificationBell />
             <ThemeToggle />
             {isAdmin && (
               <Link to="/admin">
