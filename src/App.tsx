@@ -43,6 +43,10 @@ import AdminCareers from "./pages/admin/AdminCareers";
 import AdminCareerEditor from "./pages/admin/AdminCareerEditor";
 import AdminApplications from "./pages/admin/AdminApplications";
 import AdminChallenges from "./pages/admin/AdminChallenges";
+import AdminHiring from "./pages/admin/AdminHiring";
+import Jobs from "./pages/Jobs";
+import JobDetail from "./pages/JobDetail";
+import CompanyDashboard from "./pages/CompanyDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
