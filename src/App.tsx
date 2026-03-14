@@ -69,6 +69,9 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/:id" element={<CareerDetail />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs/:id" element={<JobDetail />} />
+            <Route path="/company" element={<ProtectedRoute><CompanyDashboard /></ProtectedRoute>} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookiePolicy />} />
