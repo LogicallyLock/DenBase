@@ -20,6 +20,7 @@ const items = [
   { title: "Blog", url: "/admin/blog", icon: FileText },
   { title: "Careers", url: "/admin/careers", icon: Briefcase },
   { title: "Challenges", url: "/admin/challenges", icon: Trophy },
+  { title: "Hiring", url: "/admin/hiring", icon: Building2 },
 ];
 
 export function AdminSidebar() {
