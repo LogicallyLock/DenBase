@@ -43,6 +43,10 @@ import AdminCareers from "./pages/admin/AdminCareers";
 import AdminCareerEditor from "./pages/admin/AdminCareerEditor";
 import AdminApplications from "./pages/admin/AdminApplications";
 import AdminChallenges from "./pages/admin/AdminChallenges";
+import AdminHiring from "./pages/admin/AdminHiring";
+import Jobs from "./pages/Jobs";
+import JobDetail from "./pages/JobDetail";
+import CompanyDashboard from "./pages/CompanyDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -65,6 +69,9 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/:id" element={<CareerDetail />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs/:id" element={<JobDetail />} />
+            <Route path="/company" element={<ProtectedRoute><CompanyDashboard /></ProtectedRoute>} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookiePolicy />} />
@@ -92,6 +99,7 @@ const App = () => (
             <Route path="/admin/careers/:id" element={<AdminRoute><AdminCareerEditor /></AdminRoute>} />
             <Route path="/admin/applications" element={<AdminRoute><AdminApplications /></AdminRoute>} />
             <Route path="/admin/challenges" element={<AdminRoute><AdminChallenges /></AdminRoute>} />
+            <Route path="/admin/hiring" element={<AdminRoute><AdminHiring /></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
