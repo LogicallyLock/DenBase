@@ -2,7 +2,7 @@ import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
   LayoutDashboard, Users, ArrowLeftRight, Calendar,
-  BookOpen, Shield, ArrowLeft, FileText, Briefcase, Trophy
+  BookOpen, Shield, ArrowLeft, FileText, Briefcase, Trophy, Building2
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
