@@ -18,6 +18,13 @@ import Messages from "./pages/Messages";
 import Matches from "./pages/Matches";
 import Sessions from "./pages/Sessions";
 import TutorProfile from "./pages/TutorProfile";
+<<<<<<< HEAD
+=======
+import Credits from "./pages/Credits";
+import Projects from "./pages/Projects";
+import Challenges from "./pages/Challenges";
+import Leaderboard from "./pages/Leaderboard";
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -38,6 +45,14 @@ import AdminBlogEditor from "./pages/admin/AdminBlogEditor";
 import AdminCareers from "./pages/admin/AdminCareers";
 import AdminCareerEditor from "./pages/admin/AdminCareerEditor";
 import AdminApplications from "./pages/admin/AdminApplications";
+<<<<<<< HEAD
+=======
+import AdminChallenges from "./pages/admin/AdminChallenges";
+import AdminHiring from "./pages/admin/AdminHiring";
+import Jobs from "./pages/Jobs";
+import JobDetail from "./pages/JobDetail";
+import CompanyDashboard from "./pages/CompanyDashboard";
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +75,12 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/careers/:id" element={<CareerDetail />} />
+<<<<<<< HEAD
+=======
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs/:id" element={<JobDetail />} />
+            <Route path="/company" element={<ProtectedRoute><CompanyDashboard /></ProtectedRoute>} />
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookiePolicy />} />
@@ -71,6 +92,13 @@ const App = () => (
             <Route path="/matches" element={<ProtectedRoute><Matches /></ProtectedRoute>} />
             <Route path="/sessions" element={<ProtectedRoute><Sessions /></ProtectedRoute>} />
             <Route path="/tutor/:id" element={<ProtectedRoute><TutorProfile /></ProtectedRoute>} />
+<<<<<<< HEAD
+=======
+            <Route path="/credits" element={<ProtectedRoute><Credits /></ProtectedRoute>} />
+            <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+            <Route path="/challenges" element={<ProtectedRoute><Challenges /></ProtectedRoute>} />
+            <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
             <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
             <Route path="/admin/matches" element={<AdminRoute><AdminMatches /></AdminRoute>} />
@@ -82,6 +110,11 @@ const App = () => (
             <Route path="/admin/careers" element={<AdminRoute><AdminCareers /></AdminRoute>} />
             <Route path="/admin/careers/:id" element={<AdminRoute><AdminCareerEditor /></AdminRoute>} />
             <Route path="/admin/applications" element={<AdminRoute><AdminApplications /></AdminRoute>} />
+<<<<<<< HEAD
+=======
+            <Route path="/admin/challenges" element={<AdminRoute><AdminChallenges /></AdminRoute>} />
+            <Route path="/admin/hiring" element={<AdminRoute><AdminHiring /></AdminRoute>} />
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

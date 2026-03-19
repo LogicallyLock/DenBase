@@ -4,4 +4,13 @@ project_id = "odnrzakoyrnfxypefldh"
 verify_jwt = false
 
 [functions.razorpay-verify-payment]
+<<<<<<< HEAD
+=======
+verify_jwt = false
+
+[functions.ai-skill-match]
+verify_jwt = false
+
+[functions.ai-screen-candidate]
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 verify_jwt = false

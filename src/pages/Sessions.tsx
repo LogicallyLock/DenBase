@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock, Video } from "lucide-react";
+<<<<<<< HEAD
+=======
+import { createNotification } from "@/lib/notifications";
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 
 const Sessions = () => {
   const { user } = useAuth();
@@ -29,12 +33,66 @@ const Sessions = () => {
   };
 
   const cancelSession = async (sessionId: string) => {
+<<<<<<< HEAD
     const { error } = await supabase.from("sessions").update({ status: "cancelled" }).eq("id", sessionId);
     if (error) toast.error(error.message);
     else {
       toast.success("Session cancelled");
       fetchSessions();
     }
+=======
+    const session = sessions.find(s => s.id === sessionId);
+    const { error } = await supabase.from("sessions").update({ status: "cancelled" }).eq("id", sessionId);
+    if (error) { toast.error(error.message); return; }
+    
+    // Refund credits to participant
+    if (session && session.price && session.participant_id) {
+      const { data: pProfile } = await supabase.from("profiles").select("credits_balance").eq("user_id", session.participant_id).single();
+      if (pProfile) {
+        await supabase.from("profiles").update({ credits_balance: (pProfile as any).credits_balance + Number(session.price) }).eq("user_id", session.participant_id);
+        await supabase.from("credit_transactions").insert({
+          user_id: session.participant_id, amount: Number(session.price), type: "session_earned",
+          description: "Session cancelled - refund",
+        });
+      }
+    }
+    toast.success("Session cancelled & credits refunded");
+    fetchSessions();
+  };
+
+  const completeSession = async (sessionId: string) => {
+    const session = sessions.find(s => s.id === sessionId);
+    if (!session) return;
+    const { error } = await supabase.from("sessions").update({ status: "completed" }).eq("id", sessionId);
+    if (error) { toast.error(error.message); return; }
+
+    // Award credits to host (teacher)
+    const earnAmount = Math.round((Number(session.price) || 10) * 1);
+    const { data: hostProfile } = await supabase.from("profiles").select("credits_balance, total_sessions").eq("user_id", session.host_id).single();
+    if (hostProfile) {
+      await supabase.from("profiles").update({
+        credits_balance: (hostProfile as any).credits_balance + earnAmount,
+        total_sessions: ((hostProfile as any).total_sessions || 0) + 1,
+      }).eq("user_id", session.host_id);
+      await supabase.from("credit_transactions").insert({
+        user_id: session.host_id, amount: earnAmount, type: "session_earned",
+        description: "Session teaching reward",
+      });
+    }
+
+    // Update participant sessions_attended
+    const { data: partProfile } = await supabase.from("profiles").select("sessions_attended").eq("user_id", session.participant_id).single();
+    if (partProfile) {
+      await supabase.from("profiles").update({
+        sessions_attended: ((partProfile as any).sessions_attended || 0) + 1,
+      }).eq("user_id", session.participant_id);
+    }
+
+    // Notify host about credits earned
+    await createNotification(session.host_id, "credits_earned", "Credits Earned!", `You earned ${earnAmount} credits for completing a session.`);
+    toast.success("Session completed! Credits awarded to teacher.");
+    fetchSessions();
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
   };
 
   const statusColor: Record<string, string> = {
@@ -93,7 +151,14 @@ const Sessions = () => {
                     )}
                   </div>
                   {s.status === "scheduled" && (
+<<<<<<< HEAD
                     <div className="mt-3">
+=======
+                    <div className="mt-3 flex gap-2">
+                      <Button variant="default" size="sm" onClick={() => completeSession(s.id)}>
+                        Mark Complete
+                      </Button>
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
                       <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" onClick={() => cancelSession(s.id)}>
                         Cancel Session
                       </Button>

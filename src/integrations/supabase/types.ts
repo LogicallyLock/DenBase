@@ -160,6 +160,252 @@ export type Database = {
         }
         Relationships: []
       }
+<<<<<<< HEAD
+=======
+      challenge_submissions: {
+        Row: {
+          challenge_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          reviewed_at: string | null
+          status: string
+          submission_url: string | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          status?: string
+          submission_url?: string | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reviewed_at?: string | null
+          status?: string
+          submission_url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_submissions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          created_at: string
+          created_by: string
+          credit_reward: number
+          deadline: string | null
+          description: string
+          difficulty: string
+          id: string
+          skill_category: string | null
+          status: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          credit_reward?: number
+          deadline?: string | null
+          description?: string
+          difficulty?: string
+          id?: string
+          skill_category?: string | null
+          status?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          credit_reward?: number
+          deadline?: string | null
+          description?: string
+          difficulty?: string
+          id?: string
+          skill_category?: string | null
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      companies: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          user_id: string
+          verified: boolean
+          website: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          user_id: string
+          verified?: boolean
+          website?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          user_id?: string
+          verified?: boolean
+          website?: string | null
+        }
+        Relationships: []
+      }
+      credit_transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          id: string
+          reference_id: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          reference_id?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          reference_id?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      job_applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          id: string
+          job_id: string
+          resume_url: string | null
+          screening_score: number | null
+          screening_summary: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          id?: string
+          job_id: string
+          resume_url?: string | null
+          screening_score?: number | null
+          screening_summary?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string
+          resume_url?: string | null
+          screening_score?: number | null
+          screening_summary?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "job_listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_listings: {
+        Row: {
+          company_id: string
+          created_at: string
+          description: string
+          id: string
+          job_type: string
+          location: string | null
+          requirements: string | null
+          salary_range: string | null
+          screening_criteria: Json | null
+          skills_required: string[] | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          description?: string
+          id?: string
+          job_type?: string
+          location?: string | null
+          requirements?: string | null
+          salary_range?: string | null
+          screening_criteria?: Json | null
+          skills_required?: string[] | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          description?: string
+          id?: string
+          job_type?: string
+          location?: string | null
+          requirements?: string | null
+          salary_range?: string | null
+          screening_criteria?: Json | null
+          skills_required?: string[] | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_listings_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
       matches: {
         Row: {
           compatibility_score: number | null
@@ -225,6 +471,42 @@ export type Database = {
           },
         ]
       }
+<<<<<<< HEAD
+=======
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          read: boolean
+          reference_id: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          read?: boolean
+          reference_id?: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          read?: boolean
+          reference_id?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
       profiles: {
         Row: {
           availability: string | null
@@ -232,15 +514,33 @@ export type Database = {
           avg_rating: number | null
           bio: string | null
           created_at: string
+<<<<<<< HEAD
           experience_level: string | null
           full_name: string | null
           id: string
           is_tutor: boolean | null
           session_price: number | null
+=======
+          credits_balance: number
+          experience_level: string | null
+          full_name: string | null
+          github_url: string | null
+          id: string
+          is_tutor: boolean | null
+          linkedin_url: string | null
+          referral_code: string | null
+          referred_by: string | null
+          session_price: number | null
+          sessions_attended: number
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
           total_sessions: number | null
           tutor_category: string | null
           updated_at: string
           user_id: string
+<<<<<<< HEAD
+=======
+          website_url: string | null
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
         }
         Insert: {
           availability?: string | null
@@ -248,15 +548,33 @@ export type Database = {
           avg_rating?: number | null
           bio?: string | null
           created_at?: string
+<<<<<<< HEAD
           experience_level?: string | null
           full_name?: string | null
           id?: string
           is_tutor?: boolean | null
           session_price?: number | null
+=======
+          credits_balance?: number
+          experience_level?: string | null
+          full_name?: string | null
+          github_url?: string | null
+          id?: string
+          is_tutor?: boolean | null
+          linkedin_url?: string | null
+          referral_code?: string | null
+          referred_by?: string | null
+          session_price?: number | null
+          sessions_attended?: number
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
           total_sessions?: number | null
           tutor_category?: string | null
           updated_at?: string
           user_id: string
+<<<<<<< HEAD
+=======
+          website_url?: string | null
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
         }
         Update: {
           availability?: string | null
@@ -264,15 +582,110 @@ export type Database = {
           avg_rating?: number | null
           bio?: string | null
           created_at?: string
+<<<<<<< HEAD
           experience_level?: string | null
           full_name?: string | null
           id?: string
           is_tutor?: boolean | null
           session_price?: number | null
+=======
+          credits_balance?: number
+          experience_level?: string | null
+          full_name?: string | null
+          github_url?: string | null
+          id?: string
+          is_tutor?: boolean | null
+          linkedin_url?: string | null
+          referral_code?: string | null
+          referred_by?: string | null
+          session_price?: number | null
+          sessions_attended?: number
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
           total_sessions?: number | null
           tutor_category?: string | null
           updated_at?: string
           user_id?: string
+<<<<<<< HEAD
+=======
+          website_url?: string | null
+        }
+        Relationships: []
+      }
+      project_members: {
+        Row: {
+          contributions: number
+          id: string
+          joined_at: string
+          project_id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          contributions?: number
+          id?: string
+          joined_at?: string
+          project_id: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          contributions?: number
+          id?: string
+          joined_at?: string
+          project_id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          created_at: string
+          creator_id: string
+          description: string
+          duration: string | null
+          github_repo: string | null
+          id: string
+          max_collaborators: number | null
+          skills_required: string[] | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          description?: string
+          duration?: string | null
+          github_repo?: string | null
+          id?: string
+          max_collaborators?: number | null
+          skills_required?: string[] | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          description?: string
+          duration?: string | null
+          github_repo?: string | null
+          id?: string
+          max_collaborators?: number | null
+          skills_required?: string[] | null
+          status?: string
+          title?: string
+          updated_at?: string
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
         }
         Relationships: []
       }

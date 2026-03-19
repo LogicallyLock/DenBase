@@ -12,6 +12,11 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAdmin } from "@/hooks/useAdmin";
+<<<<<<< HEAD
+=======
+import NotificationBell from "@/components/NotificationBell";
+import AIMatchSuggestions from "@/components/AIMatchSuggestions";
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
@@ -82,7 +87,11 @@ const Dashboard = () => {
     { icon: Users, label: "Matches", value: matchCount, color: "text-primary" },
     { icon: Calendar, label: "Sessions", value: profile?.total_sessions || 0, color: "text-accent" },
     { icon: Star, label: "Rating", value: profile?.avg_rating?.toFixed(1) || "—", color: "text-primary" },
+<<<<<<< HEAD
     { icon: TrendingUp, label: "Skills", value: teachSkills.length + learnSkills.length, color: "text-accent" },
+=======
+    { icon: TrendingUp, label: "Credits", value: (profile as any)?.credits_balance || 0, color: "text-accent" },
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
   ];
 
   const quickLinks = [
@@ -92,6 +101,16 @@ const Dashboard = () => {
     { icon: Calendar, label: "Sessions", href: "/sessions", desc: "Upcoming sessions" },
   ];
 
+<<<<<<< HEAD
+=======
+  const extraLinks = [
+    { icon: TrendingUp, label: "SkillCredits", href: "/credits", desc: "View balance & history" },
+    { icon: Users, label: "Project Rooms", href: "/projects", desc: "Collaborate & build" },
+    { icon: Star, label: "Challenges", href: "/challenges", desc: "Earn credits" },
+    { icon: GraduationCap, label: "Leaderboard", href: "/leaderboard", desc: "Top contributors" },
+  ];
+
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
   return (
     <div className="min-h-screen bg-background">
       {/* Top nav */}
@@ -102,6 +121,10 @@ const Dashboard = () => {
             <span className="text-gradient">Den</span><span>base</span>
           </Link>
           <div className="flex items-center gap-3">
+<<<<<<< HEAD
+=======
+            <NotificationBell />
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
             <ThemeToggle />
             {isAdmin && (
               <Link to="/admin">
@@ -160,7 +183,11 @@ const Dashboard = () => {
           </div>
 
           {/* Quick links */}
+<<<<<<< HEAD
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+=======
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
             {quickLinks.map((l) => (
               <Link
                 key={l.label}
@@ -173,6 +200,22 @@ const Dashboard = () => {
               </Link>
             ))}
           </div>
+<<<<<<< HEAD
+=======
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {extraLinks.map((l) => (
+              <Link
+                key={l.label}
+                to={l.href}
+                className="group rounded-2xl border border-border bg-card p-5 hover:shadow-raised hover:border-primary/20 transition-all duration-200"
+              >
+                <l.icon className="w-6 h-6 text-accent mb-3" />
+                <h3 className="text-sm font-bold mb-1">{l.label}</h3>
+                <p className="text-xs text-muted-foreground">{l.desc}</p>
+              </Link>
+            ))}
+          </div>
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 
           {/* Recent Matches */}
           <div className="rounded-2xl border border-border bg-card p-6 mb-8">
@@ -225,8 +268,16 @@ const Dashboard = () => {
             )}
           </div>
 
+<<<<<<< HEAD
           {/* Upcoming sessions */}
           <div className="rounded-2xl border border-border bg-card p-6">
+=======
+          {/* AI Skill Matches */}
+          <AIMatchSuggestions />
+
+          {/* Upcoming sessions */}
+          <div className="rounded-2xl border border-border bg-card p-6 mt-6">
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold">Upcoming Sessions</h2>
               <Link to="/sessions" className="text-xs text-primary font-medium hover:underline">View all</Link>

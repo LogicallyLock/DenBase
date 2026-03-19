@@ -11,6 +11,10 @@ import {
   ArrowLeft, Star, DollarSign, Clock, BookOpen, UserCheck,
   CalendarDays, X, Video, Users, Repeat
 } from "lucide-react";
+<<<<<<< HEAD
+=======
+import { createNotification } from "@/lib/notifications";
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 
 const SESSION_TYPES = [
   { value: "video", label: "Video Call", icon: Video },
@@ -100,6 +104,20 @@ const TutorProfile = () => {
     }
     setBooking(true);
 
+<<<<<<< HEAD
+=======
+    const creditCost = Math.round((profile.session_price || 10) * (duration / 60));
+
+    // Check credit balance
+    const { data: myProfile } = await supabase.from("profiles").select("credits_balance").eq("user_id", user.id).single();
+    const currentBalance = (myProfile as any)?.credits_balance || 0;
+    if (currentBalance < creditCost) {
+      toast.error(`Insufficient credits. You need ${creditCost} but have ${currentBalance}.`);
+      setBooking(false);
+      return;
+    }
+
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
     const scheduledAt = new Date(selectedDate);
     const [hours, minutes] = selectedTime.split(":").map(Number);
     scheduledAt.setHours(hours, minutes, 0, 0);
@@ -111,6 +129,7 @@ const TutorProfile = () => {
       session_type: sessionType,
       title: sessionTitle || `Session with ${profile.full_name}`,
       duration_minutes: duration,
+<<<<<<< HEAD
       price: profile.session_price || 0,
       status: "scheduled",
     });
@@ -123,6 +142,31 @@ const TutorProfile = () => {
       setSelectedTime("");
       setSessionTitle("");
     }
+=======
+      price: creditCost,
+      status: "scheduled",
+    });
+
+    if (error) { toast.error(error.message); setBooking(false); return; }
+
+    // Deduct credits
+    await supabase.from("profiles").update({ credits_balance: currentBalance - creditCost }).eq("user_id", user.id);
+    await supabase.from("credit_transactions").insert({
+      user_id: user.id, amount: -creditCost, type: "session_spent",
+      description: `Booked session with ${profile.full_name}`,
+    });
+
+    // Notify the host
+    await createNotification(profile.user_id, "session_booked", "New Session Booked", `${profile.full_name ? "Someone" : "A user"} booked a ${duration}min session with you.`);
+    // Notify self
+    await createNotification(user.id, "credits_earned", "Credits Deducted", `${creditCost} credits spent on session with ${profile.full_name}.`);
+
+    toast.success(`Session booked! ${creditCost} credits deducted.`);
+    setShowBooking(false);
+    setSelectedDate(undefined);
+    setSelectedTime("");
+    setSessionTitle("");
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
     setBooking(false);
   };
 
@@ -368,6 +412,7 @@ const TutorProfile = () => {
                   </div>
                 )}
 
+<<<<<<< HEAD
                 {/* Price info */}
                 {profile.session_price > 0 && (
                   <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
@@ -375,6 +420,15 @@ const TutorProfile = () => {
                     <span className="text-lg font-bold text-primary">${profile.session_price}</span>
                   </div>
                 )}
+=======
+                {/* Credit cost info */}
+                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
+                  <span className="text-sm text-muted-foreground">Credit Cost</span>
+                  <span className="text-lg font-bold text-primary">
+                    {Math.round((profile.session_price || 10) * (duration / 60))} credits
+                  </span>
+                </div>
+>>>>>>> 4e6315a8dca931736abf2151a44e01558750ca0d
 
                 <Button
                   variant="hero"
